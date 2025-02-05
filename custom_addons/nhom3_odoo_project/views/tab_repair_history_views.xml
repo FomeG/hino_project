@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <record id="view_repair_order_form_inherit_history" model="ir.ui.view">
+    <field name="name">repair.order.form.inherit.history</field>
+    <field name="model">repair.order</field>
+    <field name="inherit_id" ref="repair.view_repair_order_form" />
+    <field name="arch" type="xml">
+      <xpath expr="//notebook" position="inside">
+        <page string="Repair History" name="lssc">
+          <group>
+            <field name="repair_order_id" />
+            <field name="job_type" />
+          </group>
+        </page>
+      </xpath>
+    </field>
+  </record>
+
+
+  <!-- Job Type Tree View -->
+  <record id="view_repair_job_type_tree" model="ir.ui.view">
+    <field name="name">repair.job.type.tree</field>
+    <field name="model">repair.job.type</field>
+    <field name="arch" type="xml">
+      <tree string="Job Types">
+        <field name="name" />
+        <field name="code" />
+        <field name="description" />
+      </tree>
+    </field>
+  </record>
+
+  <!-- Job Type Form View -->
+  <record id="view_repair_job_type_form" model="ir.ui.view">
+    <field name="name">repair.job.type.form</field>
+    <field name="model">repair.job.type</field>
+    <field name="arch" type="xml">
+      <form string="Job Type">
+        <sheet>
+          <group>
+            <field name="name" />
+            <field name="code" />
+            <field name="description" />
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+</odoo>

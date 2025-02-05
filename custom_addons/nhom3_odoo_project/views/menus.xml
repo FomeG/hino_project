@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Main Menu After Services -->
+    <menuitem id="menu_after_services" name="After Services" sequence="10"/>
+
+    <!-- Repair Orders Menu -->
+    <menuitem id="menu_repair_orders_main"
+              name="Repair Orders"
+              parent="menu_after_services"
+              sequence="20"/>
+
+    <!-- Submenu Repair Orders -->
+    <menuitem id="menu_repair_orders"
+              name="Repair Orders"
+              parent="menu_repair_orders_main"
+              action="action_repair_orders"
+              sequence="10"/>
+
+    <!-- Submenu Quotations -->
+    <menuitem id="menu_repair_quotes"
+              name="Quotations"
+              parent="menu_repair_orders_main"
+              action="action_repair_quotes"
+              sequence="20"/>
+
+    <!-- Submenu LSC Orders -->
+    <menuitem id="menu_repair_orders_lsc"
+              name="LSC Orders"
+              parent="menu_repair_orders_main"
+              action="action_repair_orders_lsc"
+              sequence="30"/>
+
+    <!-- Submenu HMV Payment Request -->
+    <menuitem id="menu_repair_payment_request"
+              name="HMV Payment Request"
+              parent="menu_repair_orders_main"
+              action="action_repair_payment_request"
+              sequence="40"/>
+</odoo>

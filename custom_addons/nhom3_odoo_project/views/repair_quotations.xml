@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Action Repair Orders -->
+    <record id="action_repair_orders" model="ir.actions.act_window">
+        <field name="name">Repair Orders</field>
+        <field name="res_model">repair.order</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Action Quotations -->
+    <record id="action_repair_quotes" model="ir.actions.act_window">
+        <field name="name">Quotations</field>
+        <field name="res_model">repair.order</field>  
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Action LSC Orders -->
+    <record id="action_repair_orders_lsc" model="ir.actions.act_window">
+        <field name="name">LSC Orders</field>
+        <field name="res_model">repair.order</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Action HMV Payment Request -->
+    <record id="action_repair_payment_request" model="ir.actions.act_window">
+        <field name="name">HMV Payment Request</field>
+        <field name="res_model">repair.order</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

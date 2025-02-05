@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_repair_order_form_inherit_service_info" model="ir.ui.view">
+        <field name="name">repair.order.form.inherit.service.info</field>
+        <field name="model">repair.order</field>
+        <field name="inherit_id" ref="repair.view_repair_order_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='parts']" position="replace">
+                <page string="Service Information" name="service_info">
+                    <notebook>
+                        <!-- Sparepart List -->
+                        <page string="Danh mục phụ tùng" name="sparepart_list">
+                            <field name="move_ids"
+                                context="{'default_repair_line_type': 'add'}"
+                                domain="[('repair_line_type', '=', 'add')]">
+                                <tree editable="bottom">
+                                    <field name="default_code" />
+                                    <field name="x_product_name" />
+                                    <field name="product_uom"
+                                        required="context.get('default_code', False)" />
+                                    <field name="product_uom_qty"
+                                        required="context.get('default_code', False)" />
+                                    <field name="x_pricelist" />
+                                    <field name="x_unit_price" />
+                                    <field name="x_hmv_percent" />
+                                    <field name="x_dealer_percent" />
+                                    <field name="x_discount" />
+                                    <field name="x_tax_excluded" />
+                                    <field name="x_taxes" />
+                                    <field name="x_tax_amount" />
+                                    <field name="currency_id" column_invisible="1" />
+                                </tree>
+                            </field>
+                        </page>
+
+                        <!-- Service List -->
+                        <page string="Danh mục công việc" name="service_list">
+                            <field name="move_ids"
+                                context="{'default_repair_line_type': 'add'}"
+                                domain="[('repair_line_type', '=', 'add')]">
+                                <tree editable="bottom">
+                                    <field name="x_default_code" />
+                                    <field name="x_service_description" />
+                                    <field name="x_task_details" />
+                                    <field name="x_performer" />
+                                    <field name="x_work_hours" />
+                                    <field name="x_outsource" />
+                                    <field name="x_pricelist" />
+                                    <field name="x_quantity" />
+                                    <field name="x_unit_price" />
+                                    <field name="x_hmv_percent" />
+                                    <field name="x_dealer_percent" />
+                                    <field name="x_task_count" />
+                                    <field name="x_discount" />
+                                    <field name="x_tax_excluded" />
+                                    <field name="x_taxes" />
+                                    <field name="x_tax_amount" />
+                                    <field name="currency_id" column_invisible="1" />
+                                </tree>
+                            </field>
+                        </page>
+
+                        <!-- Document List -->
+                        <page string="Chứng từ" name="document_list">
+                            <field name="move_ids" context="{'default_repair_line_type': 'add'}"
+                                domain="[('repair_line_type', '=', 'add')]">
+                                <tree editable="bottom">
+                                    <field name="x_repair_order" />
+                                    <field name="x_task_name" />
+                                    <field name="x_main_responsible" />
+                                    <field name="x_work_area" />
+                                    <field name="x_standard_hours" />
+                                    <field name="x_start_time" />
+                                    <field name="x_end_time" />
+                                    <field name="x_actual_hours" />
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>
