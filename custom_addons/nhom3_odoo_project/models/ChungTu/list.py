@@ -20,8 +20,8 @@ class ListView(models.Model):
         ('created', 'Created'),
     ], string='Satus', default='draft')
 
-    # @api.depends('x_schedule_id', 'x_schedule_id.current_status')
-    # def _compute_x_appointment_status(self):
-    #     for record in self:
-    #         record.x_appointment_status = record.x_schedule_id.current_status if record.x_schedule_id else ""
+    @api.depends('x_schedule_id', 'x_schedule_id.current_status')
+    def _compute_x_appointment_status(self):
+        for record in self:
+            record.x_appointment_status = record.x_schedule_id.current_status if record.x_schedule_id else ""
 
