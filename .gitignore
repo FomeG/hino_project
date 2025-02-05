@@ -5,13 +5,17 @@ _build/
 
 /*
 
+!README.md
+
 **/i18n/
 **/i18n/*
 
 /custom_addons/
 /custom_addons/*
 !/custom_addons/
+!/custom_addons/yeucau.md
 !/custom_addons/nhom3_odoo_project/
+!/custom_addons/test_module/
 
 
 # /addons/*
