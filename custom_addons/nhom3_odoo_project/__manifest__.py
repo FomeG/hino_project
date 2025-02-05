@@ -12,6 +12,7 @@
         'views/tab_service_info_worklist_service_views.xml',
         'views/tab_promotions_program_views.xml',
         'views/view.xml',
+        'views/quotations_list_view.xml',
         'views/menus.xml',
     ],
     'installable': True,
