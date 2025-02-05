@@ -12,6 +12,7 @@ class RepairOrder(models.Model):
         store=True
     )
 
+
     @api.depends('partner_id', 'vehicle_id', 'x_km_at_repair')
     def _compute_applicable_pricelist(self):
         """
@@ -42,6 +43,7 @@ class RepairOrder(models.Model):
     def write(self, vals):
         """Override write to ensure pricelist is recomputed when relevant fields change"""
         res = super(RepairOrder, self).write(vals)
+
         if any(field in vals for field in ['partner_id', 'vehicle_id', 'x_km_at_repair']):
             self._compute_applicable_pricelist()
         return res
