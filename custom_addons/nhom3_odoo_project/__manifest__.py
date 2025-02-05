@@ -13,6 +13,7 @@
         'views/tab_promotions_program_views.xml',
         'views/view.xml',
         'views/quotations_list_view.xml',
+        'views/smart_buttons_view.xml',
         'views/menus.xml',
     ],
     'installable': True,

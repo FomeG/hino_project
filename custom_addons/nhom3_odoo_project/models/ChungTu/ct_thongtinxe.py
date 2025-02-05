@@ -12,21 +12,21 @@ class ThongTinXe(models.Model):
         # Add other types as needed
     ], string='Vehicle Type', required=True, default='hino')
     
-    x_trademark = fields.Many2one('fleet.vehicle.model.brand', string='Brand', required=True,
+    x_trademark = fields.Many2one('fleet.vehicle.model.brand', string='Brand',
                                 help='Vehicle brand from vehicle information')
     
-    x_vehicle_model = fields.Many2one('fleet.vehicle.model', string='Model', required=True,
+    x_vehicle_model = fields.Many2one('fleet.vehicle.model', string='Model',
                                     help='Vehicle model from vehicle information')
-    x_vin_number = fields.Many2one('fleet.vehicle', string='VIN Number', required=True,
+    x_vin_number = fields.Many2one('fleet.vehicle', string='VIN Number',
                                   help='VIN number from vehicle information')
     
-    x_engine_number = fields.Many2one('fleet.vehicle', string='Engine Number', required=True,
+    x_engine_number = fields.Many2one('fleet.vehicle', string='Engine Number',
                                     help='Engine number from vehicle information')
     
-    x_hmv_maintenance_expiry = fields.Date(string='HMV Maintenance Expiry Date', required=True,
+    x_hmv_maintenance_expiry = fields.Date(string='HMV Maintenance Expiry Date',
                                          help='Expiry date from warranty registration')
     
-    x_warranty_expiry = fields.Date(string='Warranty Expiry Date', required=True,
+    x_warranty_expiry = fields.Date(string='Warranty Expiry Date',
                                   help='Warranty expiry date from vehicle information')
 
     @api.onchange('x_vin_number')
