@@ -1,2 +1,2 @@
 from . import ChungTu
-from . import Tabs
+from . import Tabs, DanhMuc
