@@ -8,6 +8,12 @@
               name="Repair Orders"
               parent="menu_after_services"
               sequence="20"/>
+    <!-- Menu Lệnh sửa chữa -->
+    <menuitem id="menu_vehicle_info"
+              name="Vehicle Information"
+              parent="menu_after_services"
+              action="action_vehicle_information"
+              sequence="30"/>
 
     <!-- Menu con Lệnh sửa chữa -->
     <menuitem id="menu_repair_orders"

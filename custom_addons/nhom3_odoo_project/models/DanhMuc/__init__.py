@@ -1,0 +1,1 @@
+from . import extend_res_partner, thong_tin_xe
