@@ -8,77 +8,77 @@ class VehicleInformation(models.Model):
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
     # Thông tin header chứng từ
-    import_date = fields.Datetime(string='Ngày nhập khẩu', tracking=True)
-    line_of_date = fields.Datetime(string='Ngày xuất xưởng', tracking=True)
-    date_to_dealer = fields.Datetime(string='Ngày giao cho đại lý', tracking=True)
-    company_id = fields.Many2one('res.company', string='Đại lý', required=True,
+    import_date = fields.Datetime(string='Import date', tracking=True)
+    line_of_date = fields.Datetime(string='Line of date', tracking=True)
+    date_to_dealer = fields.Datetime(string='Date to dealer', tracking=True)
+    company_id = fields.Many2one('res.company', string='Dealer', required=True,
                                 default=lambda self: self.env.company, tracking=True)
-    original_id = fields.Many2one('res.partner', string='Nguồn',
+    original_id = fields.Many2one('res.partner', string='Original',
                                  domain="[('is_company', '=', True)]", tracking=True)  # Sử dụng res.partner cho nhà cung cấp
-    sales_order_id = fields.Many2one('sale.order', string='Đơn bán hàng', tracking=True,
+    sales_order_id = fields.Many2one('sale.order', string='Sales Order', tracking=True,
                                     domain="[('company_id', '=', company_id)]")
 
     # Thông tin chung
-    vin = fields.Char(string='Số khung', required=True, tracking=True)
-    series_id = fields.Many2one('fleet.vehicle.model.brand', string='Dòng xe', tracking=True)  # Sử dụng model từ module fleet
-    engine_number = fields.Char(string='Số máy', required=True, tracking=True)
-    plate_number = fields.Char(string='Biển số', required=True, tracking=True)
+    vin = fields.Char(string='VIN', required=True, tracking=True)
+    series_id = fields.Many2one('fleet.vehicle.model.brand', string='Serie', tracking=True)  # Sử dụng model từ module fleet
+    engine_number = fields.Char(string='Engine', required=True, tracking=True)
+    plate_number = fields.Char(string='Plate number', required=True, tracking=True)
     carbin_certificate_date = fields.Datetime(string='Carbin certificate date', tracking=True)
     carbin_certificate_number = fields.Char(string='Carbin certificate number', tracking=True)  # Đổi sang Char để lưu cả số và chữ
     body_type_id = fields.Selection([  # Thay thế bằng selection field
         ('truck', 'Xe tải'),
         ('bus', 'Xe khách'),
         ('trailer', 'Rơ moóc')
-    ], string='Loại thùng', tracking=True)
-    body_marker = fields.Char(string='Nơi làm thùng', tracking=True)
-    front_axle = fields.Char(string='Trục trước', tracking=True)
-    f_r_axle = fields.Char(string='Trục sau trước', tracking=True)
-    rear_axle = fields.Char(string='Trục sau', tracking=True)
-    lot = fields.Char(string='Lô', tracking=True)
-    model_list_id = fields.Many2one('fleet.vehicle.model', string='Mẫu xe', tracking=True)  # Sử dụng model từ module fleet
-    payload = fields.Float(string='Tải trọng (kg)', tracking=True)
-    pdi_date = fields.Datetime(string='Ngày PDI', tracking=True)
+    ], string='Body type', tracking=True)
+    body_marker = fields.Char(string='Body maker', tracking=True)
+    front_axle = fields.Char(string='Front axle', tracking=True)
+    f_r_axle = fields.Char(string='F/R axle', tracking=True)
+    rear_axle = fields.Char(string='Rear axle', tracking=True)
+    lot = fields.Char(string='Lot', tracking=True)
+    model_list_id = fields.Many2one('fleet.vehicle.model', string='Model list', tracking=True)  # Sử dụng model từ module fleet
+    payload = fields.Float(string='Payload (kg)', tracking=True)
+    pdi_date = fields.Datetime(string='PDI date', tracking=True)
     kms_at_pdi = fields.Float(string='Kms at PDI', tracking=True)
-    key_number = fields.Char(string='Số chìa', tracking=True)
-    color = fields.Char(string='Màu', tracking=True)  # Đổi từ Many2one sang Char
-    cylinder_no = fields.Char(string='Xylanh', tracking=True)
-    trans_number = fields.Char(string='Hộp số', tracking=True)
-    f_r_diff = fields.Char(string='Vi sai trục S/T', tracking=True)
-    rear_diff = fields.Char(string='Vi sai trục sau', tracking=True)
-    battery_1 = fields.Char(string='Ắc quy 1', tracking=True)
-    battery_2 = fields.Char(string='Ắc quy 2', tracking=True)
-    note = fields.Text(string='Ghi chú', tracking=True)
+    key_number = fields.Char(string='Key number', tracking=True)
+    color = fields.Char(string='Color', tracking=True)  # Đổi từ Many2one sang Char
+    cylinder_no = fields.Char(string='Cylinder no', tracking=True)
+    trans_number = fields.Char(string='Trans number', tracking=True)
+    f_r_diff = fields.Char(string='F/R diff', tracking=True)
+    rear_diff = fields.Char(string='Rear diff', tracking=True)
+    battery_1 = fields.Char(string='Battery 1', tracking=True)
+    battery_2 = fields.Char(string='Battery 2', tracking=True)
+    note = fields.Text(string='Note', tracking=True)
 
     # Thông tin bảo hành
-    approved_warranty_reg = fields.Boolean(string='Duyệt đăng ký bảo hành', tracking=True)
-    warranty_registrator = fields.Boolean(string='Đăng ký bảo hành', default=True, tracking=True)
-    booklet_number = fields.Char(string='Số bảo hành', tracking=True)
-    bdmp_to_km = fields.Float(string='BDMP đến km', tracking=True)
-    dmmp_count = fields.Float(string='SL.Phiếu DNMP', tracking=True)
-    warranty_register_date = fields.Datetime(string='Ngày đăng ký bảo hành', tracking=True)
-    warranty_expire_date = fields.Datetime(string='Ngày hết hạn bảo hành', tracking=True)
-    odometer_reading = fields.Float(string='Km lúc bàn giao xe', tracking=True)
-    customer_delivery_date = fields.Datetime(string='Ngày giao xe cho khách hàng', tracking=True)
-    warranty_note = fields.Text(string='Ghi chú bảo hành', tracking=True)
+    approved_warranty_reg = fields.Boolean(string='Approved warranty reg', tracking=True)
+    warranty_registrator = fields.Boolean(string='Warranty registrator', default=True, tracking=True)
+    booklet_number = fields.Char(string='Booklet number', tracking=True)
+    bdmp_to_km = fields.Float(string='Free main to kms', tracking=True)
+    dmmp_count = fields.Float(string='Lubricant coupons', tracking=True)
+    warranty_register_date = fields.Datetime(string='Warranty register date', tracking=True)
+    warranty_expire_date = fields.Datetime(string='Warranty expire date', tracking=True)
+    odometer_reading = fields.Float(string='Odometer reading', tracking=True)
+    customer_delivery_date = fields.Datetime(string='Customer Delivery Date', tracking=True)
+    warranty_note = fields.Text(string='Note', tracking=True)
 
     # Thông tin khách hàng
-    owner_info = fields.Many2one('res.partner', string='Thông tin chủ xe', tracking=True)
-    owner_name = fields.Char(related='owner_info.name', string='Chủ sở hữu', tracking=True)
-    address = fields.Char(related='owner_info.street', string='Địa chỉ', tracking=True)
+    owner_info = fields.Many2one('res.partner', string='Owner infor', tracking=True)
+    owner_name = fields.Char(related='owner_info.name', string='Owner name', tracking=True)
+    address = fields.Char(related='owner_info.street', string='Address', tracking=True)
     identification_number = fields.Char(related='owner_info.ref',
-                                       string='Số CMT/CCCD', tracking=True)  # Sử dụng field chuẩn cho số ID
-    tax_code = fields.Char(related='owner_info.vat', string='Mã số thuế', tracking=True)
-    contact_phone = fields.Char(related='owner_info.mobile', string='Điện thoại của chủ sở hữu', tracking=True)
-    driver = fields.Many2one('res.partner', string='Lái xe', tracking=True)
-    driver_phone = fields.Char(related='driver.mobile', string='Điện thoại lái xe', tracking=True)
+                                       string='Personal ID', tracking=True)  # Sử dụng field chuẩn cho số ID
+    tax_code = fields.Char(related='owner_info.vat', string='Tax code', tracking=True)
+    contact_phone = fields.Char(related='owner_info.mobile', string='Phone of owner', tracking=True)
+    driver = fields.Many2one('res.partner', string='Driver', tracking=True)
+    driver_phone = fields.Char(related='driver.mobile', string='Phone of driver', tracking=True)
     fax = fields.Char(related='owner_info.x_fax', string='Fax', tracking=True)
-    contact = fields.Many2one('res.partner', string='Người liên hệ', tracking=True)
-    contact_phone_2 = fields.Char(related='contact.mobile', string='Điện thoại người liên hệ', tracking=True)
+    contact = fields.Many2one('res.partner', string='Contact', tracking=True)
+    contact_phone_2 = fields.Char(related='contact.mobile', string='Phone of contact', tracking=True)
     vehicle_ownership_date = fields.Datetime(related='owner_info.x_vehicle_ownership_date',
-                                             string='Ngày sở hữu xe', tracking=True)
-    customer_type = fields.Selection(related='owner_info.company_type', string='Loại doanh nghiệp', tracking=True)
+                                             string='Vehicle ownership date', tracking=True)
+    customer_type = fields.Selection(related='owner_info.company_type', string='Customer type', tracking=True)
     business = fields.Selection(related='owner_info.x_business',  # Thêm lĩnh vực hoạt động
-                                string='Lĩnh vực hoạt động', tracking=True)
+                                string='Kind of Business', tracking=True)
     _sql_constraints = [
         ('vin_unique', 'unique(vin)', 'Số khung đã tồn tại!'),
         ('engine_number_unique', 'unique(engine_number)', 'Số máy đã tồn tại!'),
