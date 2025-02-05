@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <record id="view_repair_order_form_inherit_service_info" model="ir.ui.view">
         <field name="name">repair.order.form.inherit.service.info</field>
@@ -9,15 +8,17 @@
                 <page string="Service Information" name="service_info">
                     <notebook>
                         <!-- Sparepart List -->
-                        <page string="Danh mục phụ tùng" name="sparepart_list">
+                        <page string="Sparepart List" name="sparepart_list">
                             <field name="move_ids"
                                 context="{'default_repair_line_type': 'add'}"
                                 domain="[('repair_line_type', '=', 'add')]">
                                 <tree editable="bottom">
-                                    <field name="default_code" />
+                                    <field name="product_uom_category_id" invisible="1"/>
+                                    <field name="default_code" domain="[('detailed_type', '=', 'product')]" />
                                     <field name="x_product_name" />
                                     <field name="product_uom"
-                                        required="context.get('default_code', False)" />
+                                        required="context.get('default_code', False)"
+                                        domain="[('category_id', '=', product_uom_category_id)]"/>
                                     <field name="product_uom_qty"
                                         required="context.get('default_code', False)" />
                                     <field name="x_pricelist" />
@@ -34,7 +35,7 @@
                         </page>
 
                         <!-- Service List -->
-                        <page string="Danh mục công việc" name="service_list">
+                        <page string="Work List" name="service_list">
                             <field name="move_ids"
                                 context="{'default_repair_line_type': 'add'}"
                                 domain="[('repair_line_type', '=', 'add')]">
@@ -61,7 +62,7 @@
                         </page>
 
                         <!-- Document List -->
-                        <page string="Chứng từ" name="document_list">
+                        <page string="Document" name="document_list">
                             <field name="move_ids" context="{'default_repair_line_type': 'add'}"
                                 domain="[('repair_line_type', '=', 'add')]">
                                 <tree editable="bottom">

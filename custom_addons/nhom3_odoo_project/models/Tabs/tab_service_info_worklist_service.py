@@ -4,52 +4,48 @@ class TabServiceInfoWorklistService(models.Model):
     _inherit = 'stock.move'
 
     # Service Information Fields
-    x_default_code = fields.Many2one(
-        'product.template', 
-        string='Công việc',
-        required=True,
-domain="[('detailed_type', '=', 'service')]"
-    )
+    x_default_code = fields.Many2one('product.template', string='Work', required=True,
+        domain="[('detailed_type', '=', 'service')]")
     
     x_service_description = fields.Char(
-        string='Mô tả công việc',
+        string='Work Description',
         related='x_default_code.name',
         readonly=True,
         required=True
     )
     
     x_task_details = fields.Char(
-        string='Chi tiết công việc'
+        string='Work Details'
     )
     
     x_performer = fields.Char(
-        string='Thực hiện'
+        string='Performer'
     )
     
     x_work_hours = fields.Float(
-        string='Giờ công',
+        string='Work Hours',
         required=True
     )
     
     x_outsource = fields.Selection([
-        ('internal', 'Nội bộ'),
-        ('external', 'Thuê ngoài')
-    ], string='Thuê ngoài')
+        ('internal', 'Internal'),
+        ('external', 'External')
+    ], string='Outsource')
     
     x_pricelist = fields.Many2one(
         'product.pricelist',
-        string='Bảng giá',
+        string='Price List',
         required=True
     )
     
     x_quantity = fields.Float(
-        string='Số lượng',
+        string='Quantity',
         required=True,
         default=1.0
     )
     
     x_unit_price = fields.Float(
-        string='Đơn giá',
+        string='Unit Price',
         compute='_compute_unit_price',
         store=True,
         required=True
@@ -63,27 +59,27 @@ domain="[('detailed_type', '=', 'service')]"
     )
     
     x_dealer_percent = fields.Float(
-        string='%Đại lý',
+        string='%Dealer',
         compute='_compute_percentages',
         store=True,
         required=True
     )
     
     x_task_count = fields.Integer(
-        string='SL công việc',
+        string='Work Count',
         required=True,
         default=1
     )
     
     x_discount = fields.Float(
-        string='Giảm giá',
+        string='Discount',
         compute='_compute_discount',
         store=True,
         required=True
     )
     
     x_tax_excluded = fields.Monetary(
-        string='Thành tiền',
+        string='Amount',
         compute='_compute_tax_excluded',
         store=True,
         currency_field='currency_id',
@@ -97,7 +93,7 @@ domain="[('detailed_type', '=', 'service')]"
     )
     
     x_tax_amount = fields.Float(
-        string='Tiền thuế VAT',
+        string='VAT Amount',
         compute='_compute_tax_amount',
         store=True,
         required=True
@@ -121,7 +117,6 @@ domain="[('detailed_type', '=', 'service')]"
     def _compute_percentages(self):
         for record in self:
             if record.x_default_code and record.x_pricelist:
-                # Get percentages from pricelist
                 record.x_hmv_percent = record.x_pricelist.get_hmv_percent(record.x_default_code)
                 record.x_dealer_percent = record.x_pricelist.get_dealer_percent(record.x_default_code)
     

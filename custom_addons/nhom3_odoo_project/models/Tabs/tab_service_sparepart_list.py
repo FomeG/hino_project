@@ -2,16 +2,15 @@ from odoo import api, fields, models
 class TabServiceInfo(models.Model):
     _inherit = 'stock.move'
 
-    # Standard fields
     default_code = fields.Many2one(
         'product.template', 
-        string='Product Code',
-        domain="[('categ_id.type', '=', 'spare_part')]",  # Only show products of type spare part
+        string='Part Code',
+        domain="[('categ_id.type', '=', 'spare_part')]",
         required=True
     )
     
     x_product_name = fields.Char(
-        string='Product Name',
+        string='Part Name',
         related='default_code.name',
         readonly=True
     )
@@ -30,7 +29,7 @@ class TabServiceInfo(models.Model):
     
     x_pricelist = fields.Many2one(
         'product.pricelist',
-        string='Pricelist',
+        string='Price List',
         required=True
     )
     
@@ -59,7 +58,7 @@ class TabServiceInfo(models.Model):
     )
     
     x_tax_excluded = fields.Monetary(
-        string='Tax Excluded',
+        string='Amount',
         compute='_compute_tax_excluded',
         store=True,
         currency_field='currency_id'
@@ -84,7 +83,6 @@ class TabServiceInfo(models.Model):
         readonly=True
     )
 
-    # Compute methods
     @api.depends('default_code', 'default_code.uom_id')
     def _compute_product_uom(self):
         for record in self:
@@ -103,16 +101,14 @@ class TabServiceInfo(models.Model):
     def _compute_percentages(self):
         for record in self:
             if record.default_code and record.x_pricelist:
-                # Logic to get HMV and Dealer percentages from pricelist
-                record.x_hmv_percent = 0.0  # Replace with actual logic
-                record.x_dealer_percent = 0.0  # Replace with actual logic
+                record.x_hmv_percent = 0.0
+                record.x_dealer_percent = 0.0
     
     @api.depends('default_code', 'x_pricelist')
     def _compute_discount(self):
         for record in self:
             if record.default_code and record.x_pricelist:
-                # Logic to get discount from pricelist
-                record.x_discount = 0.0  # Replace with actual logic
+                record.x_discount = 0.0
     
     @api.depends('product_uom_qty', 'x_unit_price', 'x_hmv_percent', 'x_dealer_percent', 'x_discount')
     def _compute_tax_excluded(self):

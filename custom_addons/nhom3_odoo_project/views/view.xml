@@ -22,7 +22,7 @@
             <!-- Nhóm: Thông tin chung -->
             <xpath expr="//notebook" position="before">
 
-                <group name="vehicle_info" string="Vehicle Information">
+                <group name="vehicle_info" string="Vehicle information">
                     <group>
                         <field name="x_vehicle_plate"
                             options="{'no_create': True, 'no_open': True}" />
@@ -139,22 +139,19 @@
             <xpath expr="//header" position="replace">
                 <header class="text-center">
                     <div class="o_statusbar_buttons text-center w-100">
-                        <button name="action_contact" string="Liên hệ" type="object"
+                        <button name="action_contact" string="Contact" type="object"
                             class="me-2 oe_highlight" />
-                        <button name="action_order_quotations" string="Đơn đặt hàng" type="object"
+                        <button name="action_order_quotations" string="Order" type="object"
                             class="me-2 oe_highlight" />
-                        <button name="action_export_inv" string="Xuất kho" type="object"
+                        <button name="action_export_inv" string="Export" type="object"
                             class="me-2 oe_highlight" />
-                        <button name="action_customer_care" string="Chăm sóc KH" type="object"
+                        <button name="action_customer_care" string="Customer Care" type="object"
                             class="me-2 oe_highlight" />
-                        <button name="action_feedback" string="Khiếu nại" type="object"
+                        <button name="action_feedback" string="Complaint" type="object"
                             class="me-2 oe_highlight" />
-                        <button name="action_checkout" string="Đại lý yêu cầu thanh toán"
-                            type="object"
+                        <button name="action_checkout" string="Dealer Payment Request" type="object"
                             class="me-2 oe_highlight" />
-
                     </div>
-
                     <field name="state" widget="statusbar" />
                 </header>
             </xpath>
