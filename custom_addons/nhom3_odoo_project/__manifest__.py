@@ -12,6 +12,7 @@
         'views/tab_repair_history_views.xml',
         'views/tab_service_info_worklist_service_views.xml',
         'views/tab_promotions_program_views.xml',
+        'views/tab_sale_order.xml',
         'views/vehicle_views.xml',
         'views/view.xml',
         'views/quotations_list_view.xml',
