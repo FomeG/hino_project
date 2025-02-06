@@ -13,7 +13,7 @@
                 <field name="address"/>
                 <field name="vin"/>
                 <field name="engine_number"/>
-                <field name="plate_number"/>
+                <field name="name"/>
             </tree>
         </field>
     </record>
@@ -48,7 +48,7 @@
                             <field name="vin"/>
                             <field name="series_id"/>
                             <field name="engine_number"/>
-                            <field name="plate_number"/>
+                            <field name="name"/>
                             <field name="carbin_certificate_date"/>
                             <field name="carbin_certificate_number"/>
                             <field name="body_type_id"/>
@@ -132,7 +132,7 @@
             <search string="Search Vehicle Information">
                 <field name="vin"/>
                 <field name="engine_number"/>
-                <field name="plate_number"/>
+                <field name="name"/>
                 <field name="owner_name"/>
                 <field name="series_id"/>
                 <separator/>
