@@ -68,5 +68,5 @@ class CtHeader(models.Model):
         if vals.get('state') == 'done':
             vals['x_completion_time'] = fields.Datetime.now()
             if not (self.x_cpus_status and self.x_repair_action and self.x_repair_result):
-                raise ValidationError(_("CPUS Status, Repair Action and Repair Result are required to complete repair"))
+                raise ValidationError(_("CPUS Status, Repair Action and Repair Result are required to complete repair2222"))
         return super(CtHeader, self).write(vals)
