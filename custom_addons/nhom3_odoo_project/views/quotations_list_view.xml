@@ -1,0 +1,24 @@
+<odoo>
+    <record id="view_repair_quotation_tree" model="ir.ui.view">
+        <field name="name">repair.order.tree.inherit</field>
+        <field name="model">repair.order</field>
+        <field name="arch" type="xml">
+            <tree decoration-info="x_status=='draft'" decoration-success="x_status=='completed'"
+                  decoration-warning="x_status=='repairing'" decoration-danger="x_status=='cancel'">
+                <field name="name"/>
+                <field name="x_quotation_id"/>
+                <field name="x_vehicle_plate"/>
+                <field name="x_vin_number"/>
+                <field name="partner_id"/>
+                <field name="x_reception_time"/>
+                <field name="x_completion_time"/>
+                <field name="x_repair_type"/>
+                <field name="x_service_advisor_id"/>
+                <field name="x_schedule_id"/>
+                <field name="x_appointment_status" widget="badge"/>
+                <field name="x_status" widget="badge"/>
+
+            </tree>
+        </field>
+    </record>
+</odoo>

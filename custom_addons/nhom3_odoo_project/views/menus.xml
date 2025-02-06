@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Menu chính After Services -->
+    <menuitem id="menu_after_services" name="After Services" sequence="10"/>
+
+    <!-- Menu Lệnh sửa chữa -->
+    <menuitem id="menu_repair_orders_main"
+              name="Repair Orders"
+              parent="menu_after_services"
+              sequence="20"/>
+    <!-- Menu Lệnh sửa chữa -->
+    <menuitem id="menu_vehicle_info"
+              name="Vehicle Information"
+              parent="menu_after_services"
+              action="action_vehicle_information"
+              sequence="30"/>
+
+    <!-- Menu con Lệnh sửa chữa -->
+    <menuitem id="menu_repair_orders"
+              name="Repair Orders"
+              parent="menu_repair_orders_main"
+              action="action_repair_orders"
+              sequence="10"/>
+
+    <!-- Menu con Báo giá -->
+    <menuitem id="menu_repair_quotes"
+              name="Repair Quotes"
+              parent="menu_repair_orders_main"
+              action="action_repair_quotes"
+              sequence="20"/>
+
+    <!-- Menu con Đơn đặt hàng (LSC) -->
+    <menuitem id="menu_repair_orders_lsc"
+              name="Repair Orders (LSC)"
+              parent="menu_repair_orders_main"
+              action="action_repair_orders_lsc"
+              sequence="30"/>
+
+    <!-- Menu con Yêu cầu thanh toán với HMV -->
+    <menuitem id="menu_repair_payment_request"
+              name="Payment Request With HMW HMV"
+              parent="menu_repair_orders_main"
+              action="action_repair_payment_request"
+              sequence="40"/>
+</odoo>

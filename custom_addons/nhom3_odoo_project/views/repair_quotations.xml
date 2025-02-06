@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="action_vehicle_information" model="ir.actions.act_window">
+        <field name="name">Thông tin xe</field>
+        <field name="res_model">vehicle.information</field>  <!-- Model tương ứng -->
+        <field name="view_mode">tree,form</field>
+    </record>
+    <record id="action_repair_orders" model="ir.actions.act_window">
+        <field name="name">Repair Orders</field>
+        <field name="res_model">repair.order</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_repair_quotes" model="ir.actions.act_window">
+        <field name="name">Repair Quotes</field>
+        <field name="res_model">repair.order</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_repair_orders_lsc" model="ir.actions.act_window">
+        <field name="name">Repair Orders (LSC)</field>
+        <field name="res_model">repair.order</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_repair_payment_request" model="ir.actions.act_window">
+        <field name="name">Payment Request With HMW HMV</field>
+        <field name="res_model">repair.order</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

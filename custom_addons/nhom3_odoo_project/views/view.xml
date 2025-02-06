@@ -1,0 +1,134 @@
+<odoo>
+    <record id="view_repair_order_form" model="ir.ui.view">
+        <field name="name">repair.order.form.inherit</field>
+        <field name="model">repair.order</field>
+        <field name="inherit_id" ref="repair.view_repair_order_form" />
+        <field name="arch" type="xml">
+            <!-- Đặt 'name' thành readonly -->
+            <xpath expr="//field[@name='name']" position="attributes">
+                <attribute name="readonly">1</attribute>
+            </xpath>
+
+            <!-- Add required invisible fields -->
+            <xpath expr="//form" position="inside">
+                <field name="company_id" invisible="1" />
+                <field name="unreserve_visible" invisible="1" />
+                <field name="reserve_visible" invisible="1" />
+                <field name="currency_id" invisible="1" />
+                <field name="schedule_date" invisible="1" />
+            </xpath>
+
+
+            <!-- Nhóm: Thông tin chung -->
+            <xpath expr="//notebook" position="before">
+
+                <group name="vehicle_info" string="Vehicle information">
+                    <group>
+                        <field name="x_vehicle_plate"
+                            options="{'no_create': True, 'no_open': True}" />
+                        <field name="x_vehicle_type" />
+                        <field name="x_trademark" options="{'no_create': True, 'no_open': True}" />
+                        <field name="x_vehicle_model"
+                            options="{'no_create': True, 'no_open': True}" />
+
+                    </group>
+                    <group>
+
+                        <field name="x_vin_number"
+                            options="{'no_create': True, 'no_open': True}" />
+                        <field name="x_engine_number"
+                            options="{'no_create': True, 'no_open': True}" />
+                        <field name="x_hmv_maintenance_expiry" />
+                        <field name="x_warranty_expiry" />
+                    </group>
+                </group>
+
+
+                <group>
+
+                    <!-- Nhóm: Chủ xe -->
+                    <group string="Vehicle Owner">
+                        <field name="partner_id" />
+                        <field name="x_driver" />
+                        <field name="x_driver_phone" />
+
+
+                        <field name="x_pricelist_id" />
+
+                    </group>
+
+
+                    <group name="general_info" string="General Information">
+
+                        <field name="currency_id" invisible="1" />
+                        <field name="x_customer_feedback" />
+                        <field name="x_notes" />
+                        <field name="x_content" />
+
+                    </group>
+
+
+                </group>
+
+
+            </xpath>
+
+            <!-- <xpath expr="//notebook" position="before">
+
+
+            </xpath> -->
+
+
+            <!-- Add total amount section at bottom right -->
+            <xpath expr="//sheet" position="inside">
+                <div class="oe_structure" />
+                <div class="row justify-content-end">
+                    <div class="col-4">
+                        <group class="mt-2 mt-md-0">
+                            <group class="oe_subtotal_footer oe_right">
+                                <field name="x_total" widget="monetary"
+                                    options="{'currency_field': 'currency_id'}" />
+                                <field name="x_tax_amount" widget="monetary"
+                                    options="{'currency_field': 'currency_id'}" />
+                                <div class="oe_subtotal_footer_separator oe_inline o_td_label">
+                                    <label for="x_total_amount" />
+                                </div>
+                                <field name="x_total_amount" nolabel="1"
+                                    class="oe_subtotal_footer_separator" widget="monetary"
+                                    options="{'currency_field': 'currency_id'}" />
+                            </group>
+                        </group>
+                    </div>
+                </div>
+            </xpath>
+
+
+            <xpath expr="//group" position="replace">
+                <!-- Nhóm: Thông tin sửa chữa -->
+                <group string="Repair Information">
+                    <group>
+                        <field name="x_repair_type" />
+                        <field name="x_schedule_id" />
+                        <field name="x_cpus_status" />
+                        <field name="x_repair_action" />
+                        <field name="x_repair_result"
+                            required="state == 'done'" />
+                        <field name="x_service_advisor_id" />
+                    </group>
+                    <group>
+                        <field name="x_entry_time" />
+                        <field name="x_reception_time" />
+                        <field name="x_expected_completion_time" />
+                        <field name="x_completion_time" />
+                        <field name="x_km_at_repair" />
+                        <field name="x_execution_location" />
+
+                    </group>
+                </group>
+            </xpath>
+
+        </field>
+    </record>
+
+
+</odoo>
