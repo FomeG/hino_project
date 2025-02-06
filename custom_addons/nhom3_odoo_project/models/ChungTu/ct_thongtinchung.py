@@ -46,23 +46,3 @@ class CtThongTinChung(models.Model):
         help='Total',
         currency_field='currency_id'
     )
-
-
-
-    def action_contact(self):
-        return
-
-    def action_order_quotations(self):
-        return
-
-    def action_export_inv(self):
-        return
-
-    def action_customer_care(self):
-        return
-
-    def action_feedback(self):
-        return
-
-    def action_checkout(self):
-        return

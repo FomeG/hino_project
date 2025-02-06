@@ -1,0 +1,56 @@
+<odoo>
+    <record id="view_repair_order_form_inherited" model="ir.ui.view">
+        <field name="name">repair.quotation.form.inherited</field>
+        <field name="model">repair.order</field>
+        <field name="inherit_id" ref="repair.view_repair_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="replace">
+                <header class="text-center">
+                    <div class="o_statusbar_buttons text-center w-100">
+
+                        <button type="object" name="action_contact"
+                                class="me-2 oe_stat_button border-2 border-primary bg-light text-primary"
+                                icon="fa-calendar"
+                                invisible="appointment_count == 0">
+                            <field name="appointment_count" widget="statinfo" string=" Appointments"/>
+                        </button>
+
+                        <button name="action_order_quotations" type="object"
+                                class="me-2 oe_stat_button border-2 border-success bg-light text-success"
+                                icon="fa-file-text-o">
+                            <span>Orders</span>
+                        </button>
+
+                        <button name="action_export_inv" type="object"
+                                class="me-2 oe_stat_button border-2 border-info bg-light text-info"
+                                icon="fa-external-link">
+                            <span>Export</span>
+                        </button>
+
+                        <button name="action_customer_care" type="object"
+                                class="me-2 oe_stat_button border-2 border-warning bg-light text-warning"
+                                icon="fa-user-circle">
+                            <span>Customer Care</span>
+                        </button>
+
+                        <button name="action_complaint" type="object"
+                                class="me-2 oe_stat_button border-2 border-danger bg-light text-danger"
+                                icon="fa-comments">
+                            <span>Complaints</span>
+                        </button>
+
+                        <button name="action_checkout" type="object"
+                                class="me-2 oe_stat_button border-2 border-secondary bg-light text-secondary"
+                                icon="fa-money">
+                            <span>Payment Request</span>
+                        </button>
+
+                    </div>
+                    <field name="state" widget="statusbar"/>
+                </header>
+            </xpath>
+
+
+        </field>
+    </record>
+</odoo>
