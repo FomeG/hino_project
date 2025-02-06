@@ -16,6 +16,7 @@ _build/
 !/custom_addons/yeucau.md
 !/custom_addons/nhom3_odoo_project/
 !/custom_addons/test_module/
+# !/custom_addons/banggia/
 
 
 # /addons/*

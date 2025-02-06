@@ -20,6 +20,6 @@ class ThongTinXe(models.Model):
     
     x_hmv_maintenance_expiry = fields.Date(string='HMV Maintenance Expiry Date', help='Expiry date from warranty registration')
     
-    x_warranty_expiry = fields.Date(string='Warranty Expiry Date', help='Warranty expiry date from vehicle information')
+    x_warranty_expiry = fields.Datetime(string='Warranty Expiry Date', help='Warranty expiry date from vehicle information', related='x_vehicle_plate.warranty_expire_date')
 
 
