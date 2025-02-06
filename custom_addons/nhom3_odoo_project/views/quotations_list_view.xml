@@ -15,7 +15,7 @@
                 <field name="x_repair_type"/>
                 <field name="x_service_advisor_id"/>
                 <field name="x_schedule_id"/>
-                <field name="x_appointment_status"/>
+                <field name="x_appointment_status" widget="badge"/>
                 <field name="x_status" widget="badge"/>
 
             </tree>

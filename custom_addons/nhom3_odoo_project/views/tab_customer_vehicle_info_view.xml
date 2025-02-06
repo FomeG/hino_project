@@ -1,0 +1,27 @@
+<odoo>
+    <record id="view_customer_vehicle_form_inherit" model="ir.ui.view">
+        <field name="name">vehicle.information.inherit.customer.vehicle</field>
+        <field name="model">repair.order</field>
+        <field name="inherit_id" ref="repair.view_repair_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='page_miscellaneous']" position="replace">
+                <page string="Customer/Vehicle" name="customer_vehicle">
+                    <group>
+                        <group string="Vehicle info">
+                            <field name="x_engine_number"/>
+                            <field name="x_main_route"/>
+                            <field name="x_body_type_id"/>
+                            <field name="x_body_marker"/>
+                            <field name="x_trans_number"/>
+                            <field name="x_customer_delivery_date"/>
+                        </group>
+                        <group string="Customer info">
+                            <field name="x_customer_email"/>
+                            <field name="x_customer_revenue"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>
