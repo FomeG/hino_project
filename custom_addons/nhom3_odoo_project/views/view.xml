@@ -51,10 +51,6 @@
                         <field name="partner_id" />
                         <field name="x_driver" />
                         <field name="x_driver_phone" />
-
-
-                        <field name="x_pricelist_id" />
-
                     </group>
 
 
