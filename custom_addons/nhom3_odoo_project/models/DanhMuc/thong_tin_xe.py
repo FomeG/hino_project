@@ -22,7 +22,7 @@ class VehicleInformation(models.Model):
     vin = fields.Char(string='VIN', required=True, tracking=True)
     series_id = fields.Many2one('fleet.vehicle.model.brand', string='Serie', tracking=True)  # Sử dụng model từ module fleet
     engine_number = fields.Char(string='Engine', required=True, tracking=True)
-    plate_number = fields.Char(string='Plate number', required=True, tracking=True)
+    name = fields.Char(string='Plate number', required=True, tracking=True)
     carbin_certificate_date = fields.Datetime(string='Carbin certificate date', tracking=True)
     carbin_certificate_number = fields.Char(string='Carbin certificate number', tracking=True)  # Đổi sang Char để lưu cả số và chữ
     body_type_id = fields.Selection([  # Thay thế bằng selection field
