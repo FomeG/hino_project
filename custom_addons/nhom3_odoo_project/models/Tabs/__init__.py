@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+# Model for Repair Order Tabs
 from . import tab_repair_history
 from . import tab_service_sparepart_list
 from . import tab_service_info_document
@@ -8,3 +9,6 @@ from . import tab_promotions_program
 from . import tab_promotions_applies
 from . import tab_sale_order
 from . import tab_customer_vehicle_info
+
+# Model for Repair Quotation Tabs
+
