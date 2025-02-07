@@ -6,6 +6,7 @@
     'depends': ['base', 'repair', 'appointment', 'fleet', 'contacts', 'delivery'],
     'data': [
         'security/ir.model.access.csv',
+        'views/repair_sale_orer_form.xml',
         'views/repair_quotations.xml',
         # 'views/repair_order_view.xml',
         # 'views/repair_order_vehicle_views.xml',
