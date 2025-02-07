@@ -1,5 +1,5 @@
 from odoo import fields, models, api
-
+from odoo.exceptions import ValidationError
 class SmartButtons(models.Model):
     _inherit = 'repair.order'
 
@@ -20,9 +20,61 @@ class SmartButtons(models.Model):
             'context': {'create': False},
         }
 
+    def _prepare_sale_order_values(self):
+        """Chuẩn bị giá trị cho việc tạo báo giá từ lệnh sửa chữa"""
+        self.ensure_one()
+
+        # Xác định loại báo giá dựa trên loại sửa chữa
+        repair_type_mapping = {
+            'warranty': 'warranty',  # Warranty repairs -> Warranty
+            'free_maintenance': 'maintenance',  # Free maintenance -> Maintenance
+            'normal_maintenance': 'maintenance',  # Normal maintenance -> Maintenance
+            'free_inspection': 'maintenance',  # Free inspection -> Maintenance
+            'spare_part': 'spare_part',  # Spare part sales -> Spare_Parts
+            'pdi': 'pdi'  # PDI -> Service
+        }
+        quote_type = repair_type_mapping.get(self.x_repair_type)
+
+        # Chuẩn bị các giá trị cho báo giá
+        values = {
+            'partner_id': self.partner_id.id,
+            'x_type_of_document': 'repair',
+            'x_type_of_repair_order': quote_type,
+            'pricelist_id': self.x_pricelist_id.id if self.x_pricelist_id else self.partner_id.property_product_pricelist.id,
+            'origin': self.id,
+            'date_order': fields.Datetime.now(),
+        }
+
+        return values
+
     # Order quotations smart button
     def action_order_quotations(self):
-        return
+        """Tạo báo giá mới từ lệnh sửa chữa"""
+        self.ensure_one()
+
+        # Kiểm tra điều kiện trước khi tạo
+        if not self.partner_id:
+            raise ValidationError('Vui lòng chọn khách hàng trước khi tạo báo giá!')
+
+        # Chuẩn bị giá trị cho báo giá
+        sale_order_values = self._prepare_sale_order_values()
+
+        # Tạo báo giá mới
+        sale_order = self.env['sale.order'].create(sale_order_values)
+
+        # Cập nhật thông tin địa chỉ từ partner
+        sale_order._onchange_partner_id()
+
+        # Trả về action để mở báo giá vừa tạo
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Báo giá',
+            'res_model': 'sale.order',
+            'res_id': 'view_sale_order_form',
+            'view_mode': 'form',
+            'view_type': 'form',
+            'target': 'current',
+        }
 
     # Export inventory smart button
     def action_export_inv(self):

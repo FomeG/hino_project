@@ -13,8 +13,10 @@
 
     <record id="action_repair_quotes" model="ir.actions.act_window">
         <field name="name">Repair Quotes</field>
-        <field name="res_model">repair.order</field>
-        <field name="view_mode">tree,form</field>
+        <field name="res_model">sale.order</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_sale_order_form"/>
+
     </record>
 
     <record id="action_repair_orders_lsc" model="ir.actions.act_window">

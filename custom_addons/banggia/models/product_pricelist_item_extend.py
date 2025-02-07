@@ -39,7 +39,6 @@ class ProductPricelistItemExtend(models.Model):
         help="Allow editing or deleting when creating orders"
     )
 
-    # Override standard field to add compute
     price_discount = fields.Float(
         string="Total Discount (%)",
         compute='_compute_price_discount',
