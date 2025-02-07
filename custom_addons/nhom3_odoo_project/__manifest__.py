@@ -3,7 +3,7 @@
     'version': '17.0.1.0',
     'author': 'Le Chinh Dai',
     'license': 'LGPL-3',
-    'depends': ['base', 'repair', 'appointment', 'fleet', 'contacts'],
+    'depends': ['base', 'repair', 'appointment', 'fleet', 'contacts', 'delivery'],
     'data': [
         'security/ir.model.access.csv',
         'views/repair_quotations.xml',
@@ -15,7 +15,7 @@
         'views/tab_sale_order.xml',
         'views/vehicle_views.xml',
         'views/view.xml',
-        'views/quotations_list_view.xml',
+        'views/repair_order_list_view.xml',
         'views/smart_buttons_view.xml',
         'views/tab_customer_vehicle_info_view.xml',
         'views/menus.xml',
