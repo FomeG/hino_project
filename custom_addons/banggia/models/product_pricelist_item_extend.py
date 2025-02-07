@@ -5,22 +5,26 @@ from odoo.exceptions import ValidationError
 class ProductPricelistItemExtend(models.Model):
     _inherit = 'product.pricelist.item'
 
+    # Custom fields với prefix x_
     x_discount_hmv = fields.Float(
-        string='Discount HMV',
+        string='HMV Discount (%)',
         digits='Discount',
-        default=0.0
+        default=0.0,
+        help="Discount percentage for HMV"
     )
 
     x_discount_dealer = fields.Float(
-        string='Discount Dealer',
+        string='Dealer Discount (%)', 
         digits='Discount',
-        default=0.0
+        default=0.0,
+        help="Discount percentage for Dealer"
     )
 
     x_discount_value = fields.Float(
-        string='Discount value',
+        string='Discount Value',
         digits='Product Price',
-        default=0.0
+        default=0.0,
+        help="Discount amount in currency"
     )
 
     x_auto = fields.Boolean(
@@ -30,21 +34,30 @@ class ProductPricelistItemExtend(models.Model):
     )
 
     x_allow_update_delete = fields.Boolean(
-        string='Allow update/delete',
+        string='Allow Update/Delete',
         default=False,
         help="Allow editing or deleting when creating orders"
     )
 
-    @api.onchange('x_discount_hmv', 'x_discount_dealer')
-    def _onchange_discounts(self):
-        """Update price_discount when HMV or Dealer discount changes"""
+    price_discount = fields.Float(
+        string="Total Discount (%)",
+        compute='_compute_price_discount',
+        store=True,
+        readonly=True,
+        help="Total discount percentage (HMV + Dealer)"
+    )
+
+    @api.depends('x_discount_hmv', 'x_discount_dealer')
+    def _compute_price_discount(self):
+        """Compute total discount from HMV and Dealer discounts"""
         for record in self:
             record.price_discount = record.x_discount_hmv + record.x_discount_dealer
 
-    @api.constrains('x_discount_hmv', 'x_discount_dealer', 'price_discount')
+    @api.constrains('x_discount_hmv', 'x_discount_dealer')
     def _check_discounts(self):
-        """Validate that sum of HMV and Dealer discounts doesn't exceed price_discount"""
+        """Validate discount values"""
         for record in self:
-            total_discount = record.x_discount_hmv + record.x_discount_dealer
-            if total_discount > record.price_discount:
-                raise ValidationError(_('Total of HMV and Dealer discounts cannot exceed the total discount'))
+            if record.x_discount_hmv < 0:
+                raise ValidationError(_('HMV Discount cannot be negative'))
+            if record.x_discount_dealer < 0:
+                raise ValidationError(_('Dealer Discount cannot be negative'))

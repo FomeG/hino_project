@@ -60,6 +60,7 @@
                         <field name="x_customer_feedback" />
                         <field name="x_notes" />
                         <field name="x_content" />
+                        <field name="x_pricelist_id"/>
 
                     </group>
 
