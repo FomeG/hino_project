@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_sale_order_form" model="ir.ui.view">
+            <field name="name">sale.order.form.inherit</field>
+            <field name="model">sale.order</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header position="inside">
+                        <button name="action_view_partner_repair_orders"
+                                string="Repair Order"
+                                type="object"
+                                class="oe_highlight"/>
+                    </header>
+                    <sheet position="replace">
+
+                        <sheet>
+
+                            <h1>
+                                <field name="name" readonly="1" placeholder="SO/2024/0001"/>
+                            </h1>
+                            <!-- Two column layout -->
+                            <group>
+                                <group>
+                                    <!-- Left column -->
+                                    <field name="partner_id" string="Khách hàng" options="{'no_create': True, 'no_open': True}"/>
+                                    <field name="company_id" invisible="1"/>
+                                    <field name="x_type_of_document" string="Loại chứng từ"/>
+                                    <field name="partner_shipping_id" string="Địa chỉ giao hàng" context="{'show_address': 1}" options="{'always_reload': True, 'no_create': True}"/>
+                                    <field name="partner_invoice_id" string="Địa chỉ xuất hóa đơn" context="{'show_address': 1}" options="{'always_reload': True, 'no_create': True}"/>
+                                    <field name="x_deposit" string="Khách hàng đặt cọc"/>
+                                    <field name="x_category" string="Loại hàng"/>
+                                    <field name="x_type_of_repair_order" string="Loại sửa chữa" invisible="[('x_type_of_document', '!=', 'repair')]"/>
+                                    <field name="pricelist_id" string="Bảng giá"/>
+                                    <field name="currency_id" string="Tiền tệ"/>
+                                    <field name="currency_rate" string="Tỷ giá"/>
+                                </group>
+                                <group>
+                                    <!-- Right column -->
+                                    <field name="date_order" string="Ngày chứng từ"/>
+                                    <field name="x_posting_date" string="Ngày hạch toán"/>
+                                    <field name="validity_date" string="Ngày đến hạn"/>
+                                    <field name="payment_term_id" string="Điều khoản thanh toán"/>
+                                    <field name="origin" string="Chứng từ gốc"/>
+                                    <field name="x_delivery_warehouse" string="Kho xuất"/>
+                                    <field name="description" string="Diễn giải"/>
+                                </group>
+                            </group>
+                        </sheet>
+                    </sheet>
+
+                    <div class="oe_chatter" position="inside">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+
+            </field>
+        </record>
+    </data>
+</odoo>
