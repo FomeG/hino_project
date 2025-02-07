@@ -18,6 +18,7 @@
         'views/quotations_list_view.xml',
         'views/smart_buttons_view.xml',
         'views/tab_customer_vehicle_info_view.xml',
+        'views/tad_Dai_ly_Dinh_Kem.xml',
         'views/menus.xml',
     ],
     'installable': True,
