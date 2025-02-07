@@ -24,41 +24,25 @@ class SmartButtons(models.Model):
         """Chuẩn bị giá trị cho việc tạo báo giá từ lệnh sửa chữa"""
         self.ensure_one()
 
-        # Logic ánh xạ từ repair_type sang type_of_repair_order
+        # Xác định loại báo giá dựa trên loại sửa chữa
         repair_type_mapping = {
-            'warranty': 'warranty',  # Bảo hành
-            'free_maintenance': 'maintenance',  # Bảo dưỡng miễn phí
-            'normal_maintenance': 'maintenance',  # Bảo dưỡng định kỳ
-            'free_inspection': 'maintenance',  # Kiểm tra miễn phí
-            'spare_part': 'parts',  # Bán phụ tùng
-            'pdi': 'service'  # PDI
+            'warranty': 'warranty',  # Warranty repairs -> Warranty
+            'free_maintenance': 'maintenance',  # Free maintenance -> Maintenance
+            'normal_maintenance': 'maintenance',  # Normal maintenance -> Maintenance
+            'free_inspection': 'maintenance',  # Free inspection -> Maintenance
+            'spare_part': 'spare_part',  # Spare part sales -> Spare_Parts
+            'pdi': 'pdi'  # PDI -> Service
         }
-
-        # Kiểm tra và lấy pricelist phù hợp
-        pricelist = self.x_pricelist_id
-        if not pricelist and self.partner_id:
-            # Tìm bảng giá được áp dụng cho khách hàng
-            domain = [
-                ('partner_ids', 'in', self.partner_id.id),
-                '|', ('date_start', '<=', fields.Date.today()), ('date_start', '=', False),
-                '|', ('date_end', '>=', fields.Date.today()), ('date_end', '=', False)
-            ]
-            pricelist = self.env['product.pricelist'].search(domain, limit=1)
-            if not pricelist:
-                # Nếu không tìm thấy, sử dụng bảng giá mặc định của khách hàng
-                pricelist = self.partner_id.property_product_pricelist
+        quote_type = repair_type_mapping.get(self.x_repair_type)
 
         # Chuẩn bị các giá trị cho báo giá
         values = {
             'partner_id': self.partner_id.id,
-            'x_type_of_document': 'repair',  # Loại chứng từ là từ lệnh sửa chữa
-            'x_type_of_repair_order': repair_type_mapping.get(self.x_repair_type, 'service'),
-            'pricelist_id': pricelist.id,
+            'x_type_of_document': 'repair',
+            'x_type_of_repair_order': quote_type,
+            'pricelist_id': self.x_pricelist_id.id if self.x_pricelist_id else self.partner_id.property_product_pricelist.id,
             'origin': self.id,
             'date_order': fields.Datetime.now(),
-            # Thêm các trường khác nếu cần
-            'x_vehicle_plate': self.x_vehicle_plate.id if hasattr(self, 'x_vehicle_plate') else False,
-            'user_id': self.x_service_advisor_id.id if hasattr(self, 'x_service_advisor_id') else self.env.user.id,
         }
 
         return values
@@ -84,7 +68,7 @@ class SmartButtons(models.Model):
         # Trả về action để mở báo giá vừa tạo
         return {
             'type': 'ir.actions.act_window',
-            'name': _('Báo giá'),
+            'name': 'Báo giá',
             'res_model': 'sale.order',
             'res_id': 'view_sale_order_form',
             'view_mode': 'form',
