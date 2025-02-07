@@ -20,7 +20,6 @@ class SaleOrder(models.Model):
         'res.partner',
         string='Customer',
         required=True,
-        domain="['|', ('company_id', '=', False), ('company_id', '=', company_id)]",
         help='Customer from repair order'
     )
 
@@ -55,7 +54,7 @@ class SaleOrder(models.Model):
     x_type_of_repair_order = fields.Selection([
         ('warranty', 'Warranty'),
         ('maintenance', 'Maintenance'),
-        ('spare_part', 'Parts'),  # Bán phụ tùng
+        ('spare_part', 'Spare_Parts'),  # Bán phụ tùng
         ('pdi', 'Service')
     ], string='Repair Type')
 
@@ -124,17 +123,26 @@ class SaleOrder(models.Model):
                 seq_date = fields.Datetime.context_timestamp(self, fields.Datetime.to_datetime(vals['date_order']))
             vals['name'] = self.env['ir.sequence'].next_by_code('sale.order', sequence_date=seq_date) or _('New')
 
-        # If created from repair order, get values
         if vals.get('origin'):
             repair_order = self.env['repair.order'].browse(vals['origin'])
             if repair_order:
+                # Map repair type to sale order type
+                repair_type_mapping = {
+                    'warranty': 'warranty',
+                    'free_maintenance': 'maintenance',
+                    'normal_maintenance': 'maintenance',
+                    'free_inspection': 'maintenance',
+                    'spare_part': 'spare_part',
+                    'pdi': 'pdi'
+                }
+                quote_type = repair_type_mapping.get(repair_order.x_repair_type)
+
                 vals.update({
                     'partner_id': repair_order.partner_id.id,
                     'x_type_of_document': 'repair',
-                    'pricelist_id': repair_order.x_pricelist_id.id,
-                    'x_type_of_repair_order': repair_order.repair_type,
+                    'x_type_of_repair_order': quote_type,
+                    'pricelist_id': repair_order.x_pricelist_id.id if repair_order.x_pricelist_id else repair_order.partner_id.property_product_pricelist.id,
                 })
-
         return super(SaleOrder, self).create(vals)
 
     @api.depends('currency_id')
@@ -159,18 +167,11 @@ class SaleOrder(models.Model):
 
         addr = self.partner_id.address_get(['delivery', 'invoice'])
 
-        # Find applicable pricelist
-        domain = [
-            ('partner_ids', 'in', self.partner_id.id),
-            '|', ('date_start', '<=', fields.Date.today()), ('date_start', '=', False),
-            '|', ('date_end', '>=', fields.Date.today()), ('date_end', '=', False)
-        ]
-        pricelist = self.env['product.pricelist'].search(domain, limit=1)
-
+        # Lấy bảng giá mặc định của khách hàng
         values = {
             'partner_invoice_id': addr['invoice'],
             'partner_shipping_id': addr['delivery'],
-            'pricelist_id': pricelist.id or self.partner_id.property_product_pricelist.id
+            'pricelist_id': self.partner_id.property_product_pricelist.id
         }
 
         self.update(values)
