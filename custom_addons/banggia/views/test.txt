@@ -26,7 +26,7 @@
         </field>
     </record>
 
-    <!-- Tree View -->
+    <!-- Tree  View -->
     <record id="product_pricelist_item_tree_view_inherit" model="ir.ui.view">
         <field name="name">product.pricelist.item.tree.inherit</field>
         <field name="model">product.pricelist.item</field>
