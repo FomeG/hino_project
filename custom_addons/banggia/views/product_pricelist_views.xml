@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- List View cho Bảng giá -->
+    <record id="view_product_pricelist_tree_custom" model="ir.ui.view">
+        <field name="name">product.pricelist.tree.custom</field>
+        <field name="model">product.pricelist</field>
+        <field name="priority">99</field>
+        <field name="arch" type="xml">
+            <tree>
+                <!-- Các trường standard từ product.pricelist -->
+                <field name="name" string="Pricelist Name" />
+                <field name="discount_policy" string="Discount Policy" />
+                <field name="currency_id" string="Currency" widget="many2one"
+                    options="{'no_create': True, 'no_open': True}" domain="[('active','=',True)]" />
+                <field name="company_id" string="Company" />
+            </tree>
+        </field>
+    </record>
+
+    <!-- Thêm vào file product_pricelist_views.xml -->
+    <record id="view_product_pricelist_form_custom" model="ir.ui.view">
+        <field name="name">product.pricelist.form.custom</field>
+        <field name="model">product.pricelist</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name" />
+                        <field name="currency_id" options="{'no_create': True}" />
+                        <field name="discount_policy" />
+                        <field name="company_id" groups="base.group_multi_company" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <!-- Kế thừa và chỉnh sửa form view gốc -->
+    <record id="view_product_pricelist_form_inherit" model="ir.ui.view">
+        <field name="name">product.pricelist.form.inherit</field>
+        <field name="model">product.pricelist</field>
+        <field name="inherit_id" ref="product.product_pricelist_view" />
+        <field name="arch" type="xml">
+            <!-- Thêm các trường mới vào tree view của item_ids -->
+            <xpath expr="//field[@name='item_ids']/tree[1]" position="attributes">
+                <attribute name="editable">bottom</attribute>
+            </xpath>
+
+            <!-- Chỉnh sửa các trường trong tree view của item_ids -->
+            <xpath expr="//field[@name='item_ids']/tree[1]/field[@name='fixed_price']"
+                position="before">
+                <field name="x_discount_hmv" />
+                <field name="x_discount_dealer" />
+                <field name="price_discount" readonly="1" />
+                <field name="x_discount_value" />
+                <field name="x_auto" />
+                <field name="x_allow_update_delete" />
+            </xpath>
+
+            <!-- Ẩn một số trường không cần thiết -->
+            <xpath expr="//field[@name='item_ids']/tree[1]/field[@name='fixed_price']"
+                position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <!-- Thêm các tab mới sau tab Configuration -->
+            <xpath expr="//page[@name='pricelist_config']" position="after">
+                <!-- Tab Áp dụng cho xe -->
+                <page name="applyforvehicles" string="Apply for vehicles">
+                    <group>
+                        <group>
+                            <field name="x_apply_for_vehicles" widget="radio" />
+                            <field name="x_vehicle_ids"
+                                widget="many2many_tags"
+                                options="{'no_create': True}"
+                                invisible="x_apply_for_vehicles != 'specific'"
+                                required="x_apply_for_vehicles == 'specific'">
+                                <tree>
+                                    <field name="series_id" />
+                                    <field name="model_list_id" />
+                                    <field name="vin" />
+                                    <field name="engine_number" />
+                                </tree>
+                            </field>
+                        </group>
+                    </group>
+                </page>
+
+                <!-- Tab Áp dụng cho khách hàng -->
+                <page name="applyforcustomer" string="Apply for customers">
+                    <group>
+                        <group>
+                            <field name="x_apply_for" widget="radio" />
+                            <field name="x_customer_ids"
+                                widget="many2many_tags"
+                                options="{'no_create': True}"
+                                invisible="x_apply_for != 'specific'"
+                                required="x_apply_for == 'specific'" />
+                        </group>
+                    </group>
+                </page>
+
+                <!-- Tab Áp dụng theo KM -->
+                <page name="applyforkm" string="Apply for kilometers">
+                    <group>
+                        <group>
+                            <field name="x_from_km" />
+                            <field name="x_to_km" />
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+    <!-- Action cho menu Bảng giá -->
+    <record id="action_product_pricelist_custom" model="ir.actions.act_window">
+        <field name="name">Price List</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">product.pricelist</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_product_pricelist_tree_custom" />
+    </record>
+</odoo>

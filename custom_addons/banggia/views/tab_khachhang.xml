@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_tab_khachhang_pricelist" model="ir.ui.view">
+        <field name="name">view.tab.khachhang.pricelist</field>
+        <field name="model">product.pricelist</field>
+        <field name="inherit_id" ref="product.product_pricelist_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='pricelist_config']" position="after">
+                <page name="applyforcustomer" string="Apply for customers">
+                    <group>
+                        <group>
+                            <field name="x_apply_for" widget="radio" />
+                            <field name="x_customer_ids"
+                                widget="many2many_tags"
+                                options="{'no_create': True}"
+                                invisible="x_apply_for != 'specific'"
+                                required="x_apply_for == 'specific'" />
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Tạo view tree riêng để hiển thị mã khách hàng trong dropdown -->
+    <record id="view_partner_tree_with_code" model="ir.ui.view">
+        <field name="name">res.partner.tree.with.code</field>
+        <field name="model">res.partner</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="ref"/>
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+</odoo>
