@@ -58,5 +58,25 @@
 
             </field>
         </record>
+
+        <!-- LIST VIEW -->
+        <record id="view_sale_order_list" model="ir.ui.view">
+            <field name="name">sale.order.list.view</field>
+            <field name="model">sale.order</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name" string="Số đơn hàng"/>
+                    <field name="partner_id" string="Khách hàng"/>
+                    <field name="date_order" string="Ngày chứng từ"/>
+                    <field name="x_type_of_document" string="Loại chứng từ"/>
+                    <field name="x_category" string="Loại hàng"/>
+                    <field name="x_type_of_repair_order" string="Loại sửa chữa"/>
+                    <field name="pricelist_id" string="Bảng giá"/>
+                    <field name="currency_id" string="Tiền tệ"/>
+                    <field name="amount_total" string="Tổng tiền"/>
+                    <field name="state" string="Trạng thái"/>
+                </tree>
+            </field>
+        </record>
     </data>
 </odoo>

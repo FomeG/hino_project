@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_tab_order_detail_inherit_history2" model="ir.ui.view">
+            <field name="name">tab.order.detail.inherit.history2</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="nhom3_odoo_project.view_sale_order_form"/> 
+            <field name="arch" type="xml">
+                <xpath expr="//sheet" position="inside">
+                    <notebook>
+                        <page string="Chi tiết đơn hàng" name="order_detail_tab">
+                            <field name="order_line">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                    <field name="description"/>
+                                    <field name="product_id"/>
+                                    <field name="product_name" readonly="1"/>
+                                    <field name="product_uom" 
+                                        domain="[('category_id', '=', product_id.uom_id.category_id)]"
+                                        attrs="{'invisible': [('product_id', '=', False)]}"/>
+                                    <field name="product_uom_qty"/>
+                                    <field name="qty_delivered" 
+                                        attrs="{'invisible': [('order_id.picking_ids.state', '!=', 'done')]}"/>
+                                    <field name="qty_invoiced"/>
+                                    <field name="price_unit" required="1"/>
+                                    <field name="price_subtotal"/>
+                                    <field name="pricelist_id"/>
+                                    <field name="delivery_warehouse"/>
+                                    <field name="percent_hmv"/>
+                                    <field name="percent_dealer"/>
+                                    <field name="discount"/>
+                                    <field name="tax_id"/>
+                                    <field name="untaxed_amount"/>
+                                    <field name="company_id" invisible="0"/>
+                                    <field name="taxes"/>
+                                    <field name="total"/>
+                                </tree>
+                            </field>
+                            <!-- Footer hiển thị các giá trị tổng hợp -->
+                      
+
+                        </page>
+                    </notebook>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
