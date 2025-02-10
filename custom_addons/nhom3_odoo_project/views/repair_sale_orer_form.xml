@@ -30,7 +30,7 @@
                                     <field name="partner_invoice_id" string="Địa chỉ xuất hóa đơn" context="{'show_address': 1}" options="{'always_reload': True, 'no_create': True}"/>
                                     <field name="x_deposit" string="Khách hàng đặt cọc"/>
                                     <field name="x_category" string="Loại hàng"/>
-                                    <field name="x_type_of_repair_order" string="Loại sửa chữa" invisible="[('x_type_of_document', '!=', 'repair')]"/>
+                                    <field name="x_type_of_repair_order" string="Loại sửa chữa"/>
                                     <field name="pricelist_id" string="Bảng giá"/>
                                     <field name="currency_id" string="Tiền tệ"/>
                                     <field name="currency_rate" string="Tỷ giá"/>

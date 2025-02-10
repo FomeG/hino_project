@@ -7,6 +7,7 @@
     'data': [
         'security/ir.model.access.csv',
         'views/repair_sale_orer_form.xml',
+        'views/bg_hoadondt_view.xml',
         'views/repair_quotations.xml',
         # 'views/repair_order_view.xml',
         # 'views/repair_order_vehicle_views.xml',
@@ -25,4 +26,5 @@
     ],
     'installable': True,
     'application': True,
+    'sequence': 1
 }
