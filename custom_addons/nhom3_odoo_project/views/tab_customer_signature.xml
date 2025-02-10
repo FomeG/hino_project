@@ -6,15 +6,19 @@
         <field name="inherit_id" ref="repair.view_repair_order_form" />
         <field name="arch" type="xml">
             <xpath expr="//notebook" position="inside">
-                <page string="Customer Signature" name="customer_signature">
+                <page string="Customer Signature" name="customer_signature"
+                    invisible="not require_signature and not signed_by and not signature and not signed_on">
                     <group>
-                        <field name="sale_order_id" invisible="1" />
-                        <field name="signed_by" />
-                        <field name="signed_on" />
-                        <field name="signature" widget="image" />
+                        <field name="signed_by" readonly="signature" />
+                        <field name="signed_on" readonly="signature" />
+                        <field name="signature" widget="signature" />
+                        <field name="require_signature" invisible="1" />
                     </group>
                 </page>
+                <h2>Chưa có gì, đang xem lại phần này, làm sau 🤣🤣🤣</h2>
+
             </xpath>
+
         </field>
     </record>
 </odoo>
