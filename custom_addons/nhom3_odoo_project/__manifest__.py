@@ -28,6 +28,7 @@
         #endregion
         
         
+        'views/tad_order_detail.xml',
         'views/tab_customer_signature.xml',
         'views/menus.xml',
     ],
