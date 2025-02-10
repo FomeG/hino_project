@@ -95,7 +95,7 @@ class SaleOrderLine(models.Model):
     @api.depends('product_uom_qty', 'price_unit', 'percent_hmv', 'percent_dealer', 'discount')
     def _compute_price_subtotal(self):
         for line in self:
-            line.price_subtotal = line.product_uom_qty * (line.price_unit - line.price_unit * line.percent_hmv - line.price_unit * line.percent_dealer) - line.discount
+            line.price_subtotal = line.product_uom_qty * (line.price_unit - line.price_unit * line.percent_hmv / 100 - line.price_unit * line.percent_dealer/100) - line.discount
 
     @api.depends('price_subtotal')
     def _compute_untaxed_amount(self):
@@ -117,3 +117,36 @@ class SaleOrderLine(models.Model):
     def _onchange_uom_product_id(self):
         if self.product_id and self.product_id.uom_id:
             self.product_uom = self.product_id.uom_id
+
+
+class SaleOrder(models.Model):
+    _inherit = 'sale.order'
+
+    # Nếu chưa có, bạn có thể định nghĩa lại các trường này hoặc ghi đè công thức tính của chúng.
+    amount_untaxed = fields.Monetary(
+        string="Untaxed Amount", 
+        compute="_compute_amounts", 
+        store=True, 
+        currency_field='currency_id'
+    )
+    amount_tax = fields.Monetary(
+        string="Taxes", 
+        compute="_compute_amounts", 
+        store=True, 
+        currency_field='currency_id'
+    )
+    amount_total = fields.Monetary(
+        string="Total", 
+        compute="_compute_amounts", 
+        store=True, 
+        currency_field='currency_id'
+    )
+
+    @api.depends('order_line.price_subtotal', 'order_line.taxes')
+    def _compute_amounts(self):
+        for order in self:
+            total_untaxed = sum(line.price_subtotal for line in order.order_line)
+            total_tax = sum(line.taxes for line in order.order_line)
+            order.amount_untaxed = total_untaxed
+            order.amount_tax = total_tax
+            order.amount_total = total_untaxed + total_tax            
