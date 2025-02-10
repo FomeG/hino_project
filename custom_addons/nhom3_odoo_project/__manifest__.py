@@ -20,8 +20,7 @@
         'views/repair_order_list_view.xml',
         'views/smart_buttons_view.xml',
         'views/tab_customer_vehicle_info_view.xml',
-        
-        
+        'views/tad_order_detail.xml',
         'views/tab_customer_signature.xml',
         'views/menus.xml',
     ],
