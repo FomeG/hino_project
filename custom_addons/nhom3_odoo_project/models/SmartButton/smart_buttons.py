@@ -4,6 +4,7 @@ class SmartButtons(models.Model):
     _inherit = 'repair.order'
 
     appointment_count = fields.Integer(string="Appointment Count", compute="_compute_appointment_count")
+    repair_order_count = fields.Integer(string="Repair Order Count", compute="_compute_repair_order_count")
 
     # Contact smart button
     def _compute_appointment_count(self):
@@ -19,6 +20,11 @@ class SmartButtons(models.Model):
             'domain': [('id', '=', self.x_schedule_id.id)],
             'context': {'create': False},
         }
+
+    # Order quotations smart button
+    def _compute_repair_order_count(self):
+        for record in self:
+            record.repair_order_count = self.env['sale.order'].search_count([('x_appointment_id', '=', record.id)])
 
     def _prepare_sale_order_values(self):
         """Chuẩn bị giá trị cho việc tạo báo giá từ lệnh sửa chữa"""
@@ -47,7 +53,6 @@ class SmartButtons(models.Model):
 
         return values
 
-    # Order quotations smart button
     def action_order_quotations(self):
         """Tạo báo giá mới từ lệnh sửa chữa"""
         self.ensure_one()
