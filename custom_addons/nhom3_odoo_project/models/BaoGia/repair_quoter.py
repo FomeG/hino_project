@@ -191,14 +191,18 @@ class SaleOrder(models.Model):
             self.x_posting_date = self.date_order
 
     def action_view_partner_repair_orders(self):
+        self.ensure_one()
+
+        # Kiểm tra nếu origin là một record hợp lệ
+        if not self.origin or not self.origin.id:
+            raise ValidationError("Không tìm thấy chứng từ gốc (Origin) để mở.")
+
+        # Trỏ thẳng đến bản ghi `origin`
         return {
             'type': 'ir.actions.act_window',
-            'name': 'Repair Orders',
-            'res_model': 'repair.order',
-            'view_mode': 'tree,form',
-            'domain': [('partner_id', '=', self.partner_id.id)],
-            'context': {
-                'default_partner_id': self.partner_id.id,
-            },
-            'target': 'current'
+            'name': 'Chứng từ gốc',
+            'res_model': self.origin._name,
+            'view_mode': 'form',
+            'res_id': self.origin.id,
+            'target': 'main',
         }
