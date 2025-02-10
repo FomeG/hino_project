@@ -70,9 +70,9 @@ class SmartButtons(models.Model):
             'type': 'ir.actions.act_window',
             'name': 'Báo giá',
             'res_model': 'sale.order',
-            'res_id': 'view_sale_order_form',
             'view_mode': 'form',
-            'view_type': 'form',
+            'view_id': self.env.ref('nhom3_odoo_project.view_sale_order_form').id,
+            'res_id': sale_order.id,
             'target': 'current',
         }
 
