@@ -23,7 +23,7 @@
                     <button name="action_order_quotations" type="object"
                             class="me-2 oe_stat_button border-2 border-success bg-light text-success"
                             icon="fa-file-text-o"
-                        invisible="False">
+                            invisible="False">
                         <span>Orders</span>
                     </button>
 
@@ -52,7 +52,30 @@
                     </button>
 
                 </div>
-<!--                <field name="state" widget="statusbar"/>-->
+            </xpath>
+
+            <xpath expr="//header" position="replace">
+                <header>
+                    <button name="button_repair_confirm" invisible="x_status != 'draft'" type="object" string="Confirm Repair"
+                            class="oe_highlight"/>
+                    <button name="button_repair_start" invisible="x_status != 'confirmed'" type="object"
+                            string="Start Repair" class="oe_highlight"/>
+                    <button name="button_repair_end" invisible="x_status != 'repairing'" type="object"
+                            string="End Repair" class="oe_highlight"/>
+                    <button name="button_create_sale_order" type="object" string="Create Quotation"
+                            invisible="x_status == 'canceled' or sale_order_id"/>
+                    <button name="button_repair_cancel" string="Cancel Repair" type="object"
+                            invisible="x_status in ('completed', 'canceled')"/>
+                    <button name="button_repair_cancel_draft" invisible="x_status not in ('canceled', 'completed')" string="Set to Draft"
+                            type="object"/>
+
+                    <field name="x_status" widget="statusbar"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+            </xpath>
+
+            <xpath expr="//header//field[@name='state']" position="attributes">
+                <attribute name="invisible">1</attribute>
             </xpath>
 
         </field>

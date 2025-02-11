@@ -1,5 +1,7 @@
 from odoo import fields, models, api
 from odoo.exceptions import ValidationError
+
+
 class SmartButtons(models.Model):
     _inherit = 'repair.order'
 
@@ -95,4 +97,3 @@ class SmartButtons(models.Model):
 
     def action_checkout(self):
         return
-

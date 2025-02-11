@@ -1,0 +1,17 @@
+<odoo>
+    <record id="view_meeting_form_inherit" model="ir.ui.view">
+        <field name="name">meeting.form.inherit.repair</field>
+        <field name="model">calendar.event</field>  <!-- Replace with the correct model if different -->
+        <field name="inherit_id" ref="calendar.view_calendar_event_form"/>  <!-- Replace with actual view ID -->
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button type="object" name="action_open_repair_orders"
+                        string="Repair Orders" icon="fa-wrench"
+                        class="oe_stat_button"
+                        invisible="x_repair_order_count == 0">
+                    <field name="x_repair_order_count" widget="statinfo" string="Repair Orders"/>
+                </button>
+            </xpath>
+        </field>
+    </record>
+</odoo>

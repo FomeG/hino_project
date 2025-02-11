@@ -1,0 +1,114 @@
+<odoo>
+    <data>
+        <!-- Kế thừa form của repair sale order -->
+        <record id="view_repair_sale_order_form_inherit_other_info" model="ir.ui.view">
+            <field name="name">repair.sale.order.form.inherit.other.info</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="nhom3_odoo_project.view_sale_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='electronic_invoice']" position="after">
+<!--                    <page string="Other Info">-->
+<!--                        <group name="group1">-->
+<!--                            <group string="SALES">-->
+<!--                                <field name="user_id"/>-->
+<!--                                <field name="team_id"/>-->
+<!--                                <field name="company_id"/>-->
+<!--                                <field name="require_signature"/>-->
+<!--                                <field name="require_payment"/>-->
+<!--                                <field name="client_order_ref"/>-->
+<!--                                <field name="tag_ids"/>-->
+<!--                            </group>-->
+<!--                            <group string="INVOICING">-->
+<!--                                <field name="fiscal_position_id"/>-->
+<!--                                <field name="analytic_account_id"/>-->
+<!--                                <field name="journal_id"/>-->
+<!--                                <field name="invoice_status"/>-->
+<!--                            </group>-->
+<!--                        </group>-->
+<!--                        <group name="group2">-->
+<!--                            <group string="DELIVERY">-->
+<!--                                <field name="incoterm"/>-->
+<!--                                <field name="incoterm_location"/>-->
+<!--                                <field name="picking_policy"/>-->
+<!--                                <field name="shipping_weight"/>-->
+<!--                                <field name="commitment_date"/>-->
+<!--                                <field name="effective_date"/>-->
+<!--                            </group>-->
+<!--                            <group string="TRACKING">-->
+<!--                                <field name="origin"/>-->
+<!--                                <field name="campaign_id"/>-->
+<!--                                <field name="medium_id"/>-->
+<!--                                <field name="source_id"/>-->
+<!--                            </group>-->
+<!--                        </group>-->
+<!--                    </page>-->
+                    <page string="Other Info" name="other_information">
+                        <group>
+                            <group name="sales_person" string="Sales">
+                                <field name="user_id" widget="many2one_avatar_user"/>
+                                <field name="team_id" context="{'kanban_view_ref': 'sales_team.crm_team_view_kanban'}"
+                                       options="{'no_create': True}"/>
+                                <field name="company_id" options="{'no_create': True}"
+                                       groups="base.group_multi_company"/>
+                                <field name="require_signature"/>
+                                <label for="require_payment"/>
+                                <div id="require_payment">
+                                    <field name="require_payment"/>
+                                    <span class="mx-3" invisible="not require_payment">of</span>
+                                    <field name="prepayment_percent"
+                                           invisible="not require_payment" widget="percentage" style="width: 3rem"/>
+                                </div>
+                                <field name="reference" readonly="1" invisible="not reference"/>
+                                <field name="client_order_ref"/>
+                                <field name="tag_ids" widget="many2many_tags"
+                                       options="{'color_field': 'color', 'no_create_edit': True}"/>
+                            </group>
+                            <group name="sale_info" string="Invoicing">
+                                <field name="show_update_fpos" invisible="1"/>
+                                <label for="fiscal_position_id"/>
+                                <div class="o_row">
+                                    <field name="fiscal_position_id" options="{'no_create': True}"/>
+                                    <button name="action_update_taxes" type="object" string=" Update Taxes"
+                                            help="Recompute all taxes based on this fiscal position"
+                                            class="btn-link mb-1 px-0" icon="fa-refresh"
+                                            confirm="This will update all taxes based on the currently selected fiscal position."
+                                            invisible="not show_update_fpos"/>
+                                </div>
+                                <field name="partner_invoice_id" groups="!account.group_delivery_invoice_address"
+                                       invisible="1"/>
+                                <field name="analytic_account_id"
+                                       context="{'default_partner_id':partner_invoice_id, 'default_name':name}"
+
+                                       groups="analytic.group_analytic_accounting" force_save="1"/>
+                                <field name="journal_id" groups="base.group_no_one"/>
+
+                                <field name="invoice_status"/>
+                                <!-- test_event_configurator -->
+                                <field name="invoice_status" invisible="1" groups="!base.group_no_one"/>
+                            </group>
+                            <group name="sale_shipping" string="Shipping">
+                                <field name="incoterm"/>
+                                <field name="incoterm_location"/>
+                                <field name="picking_policy"/>
+                                <field name="shipping_weight"/>
+                                <label for="commitment_date" string="Delivery Date"/>
+                                <div name="commitment_date_div" class="o_row">
+                                    <field name="commitment_date"/>
+                                    <span name="expected_date_span" class="text-muted">Expected:
+                                        <field name="expected_date" class="oe_inline" widget="date"/>
+                                    </span>
+                                </div>
+                            </group>
+                            <group string="Tracking" name="sale_reporting">
+                                <field name="origin"/>
+                                <field name="campaign_id" options="{'create_name_field': 'title'}"/>
+                                <field name="medium_id"/>
+                                <field name="source_id"/>
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
