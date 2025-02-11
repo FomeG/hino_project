@@ -6,7 +6,7 @@
             <field name="model">sale.order</field>
             <field name="inherit_id" ref="nhom3_odoo_project.view_sale_order_form"/>
             <field name="arch" type="xml">
-                <xpath expr="//page[@name='electronic_invoice']" position="after">
+                <xpath expr="//page[@name='order_lines_tab']" position="after">
 <!--                    <page string="Other Info">-->
 <!--                        <group name="group1">-->
 <!--                            <group string="SALES">-->
