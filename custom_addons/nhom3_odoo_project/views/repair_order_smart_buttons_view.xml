@@ -23,8 +23,8 @@
                     <button name="action_order_quotations" type="object"
                             class="me-2 oe_stat_button border-2 border-success bg-light text-success"
                             icon="fa-file-text-o"
-                            invisible="False">
-                        <span>Orders</span>
+                            invisible="repair_order_count == 0">
+                        <field name="repair_order_count" widget="statinfo" string=" Orders"/>
                     </button>
 
                     <button name="action_export_inv" type="object"
@@ -63,7 +63,7 @@
                     <button name="button_repair_end" invisible="x_status != 'repairing'" type="object"
                             string="End Repair" class="oe_highlight"/>
                     <button name="button_create_sale_order" type="object" string="Create Quotation"
-                            invisible="x_status == 'canceled' or sale_order_id"/>
+                            invisible="x_status == 'canceled' or repair_order_count != 0"/>
                     <button name="button_repair_cancel" string="Cancel Repair" type="object"
                             invisible="x_status in ('completed', 'canceled')"/>
                     <button name="button_repair_cancel_draft" invisible="x_status not in ('canceled', 'completed')" string="Set to Draft"

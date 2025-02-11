@@ -26,67 +26,16 @@ class SmartButtons(models.Model):
     # Order quotations smart button
     def _compute_repair_order_count(self):
         for record in self:
-            record.repair_order_count = self.env['sale.order'].search_count([('x_appointment_id', '=', record.id)])
-
-    def _prepare_sale_order_values(self):
-        """Chuẩn bị giá trị cho việc tạo báo giá từ lệnh sửa chữa"""
-        self.ensure_one()
-
-        # Xác định loại báo giá dựa trên loại sửa chữa
-        repair_type_mapping = {
-            'warranty': 'warranty',  # Warranty repairs -> Warranty
-            'free_maintenance': 'maintenance',  # Free maintenance -> Maintenance
-            'normal_maintenance': 'maintenance',  # Normal maintenance -> Maintenance
-            'free_inspection': 'maintenance',  # Free inspection -> Maintenance
-            'spare_part': 'spare_part',  # Spare part sales -> Spare_Parts
-            'pdi': 'pdi'  # PDI -> Service
-        }
-        quote_type = repair_type_mapping.get(self.x_repair_type)
-
-        # Chuẩn bị các giá trị cho báo giá
-        values = {
-            'partner_id': self.partner_id.id,
-            'x_type_of_document': 'repair',
-            'x_type_of_repair_order': quote_type,
-            'pricelist_id': self.x_pricelist_id.id if self.x_pricelist_id else self.partner_id.property_product_pricelist.id,
-            'origin': self.id,
-            'date_order': fields.Datetime.now(),
-        }
-
-        return values
+            record.repair_order_count = self.env['sale.order'].search_count([('origin', '=', record.id)])
 
     def action_order_quotations(self):
-        """Tạo báo giá mới từ lệnh sửa chữa"""
-        self.ensure_one()
-
-        if not self.partner_id:
-            raise ValidationError('Vui lòng chọn khách hàng trước khi tạo báo giá!')
-
-        existing_sale_order = self.env['sale.order'].search([('origin', '=', self.name)], limit=1)
-
-        if existing_sale_order:
-            return {
-                'type': 'ir.actions.act_window',
-                'name': 'Báo giá',
-                'res_model': 'sale.order',
-                'view_mode': 'form',
-                'view_id': self.env.ref('nhom3_odoo_project.view_sale_order_form').id,
-                'res_id': existing_sale_order.id,
-                'target': 'current',
-            }
-
-        sale_order_values = self._prepare_sale_order_values()
-        sale_order = self.env['sale.order'].create(sale_order_values)
-        sale_order._onchange_partner_id()
-
         return {
+            "name": "Order Quotations",
             'type': 'ir.actions.act_window',
-            'name': 'Báo giá',
+            'view_mode': 'tree,form',
             'res_model': 'sale.order',
-            'view_mode': 'form',
-            'view_id': self.env.ref('nhom3_odoo_project.view_sale_order_form').id,
-            'res_id': sale_order.id,
-            'target': 'current',
+            'domain': [('origin', '=', self.id)],
+            'context': {'create': False},
         }
 
     # Export inventory smart button
