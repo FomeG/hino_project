@@ -10,7 +10,7 @@
                 <!-- Chèn tab mới vào cuối sheet -->
                 <xpath expr="//sheet" position="inside">
                     <notebook>
-                   <page string="Hoá đơn điện tử - Electronic Invoice" name="electronic_invoice">
+                   <page string="Hoá đơn điện tử - Electronic Invoice" name="order_lines_tab">
                             <group>
                                 <label for="x_electronic_invoice" string="Xuất hoá đơn điện tử - Issue Electronic Invoice"/>
                                 <field name="x_electronic_invoice"

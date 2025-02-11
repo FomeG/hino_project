@@ -59,20 +59,26 @@ class SmartButtons(models.Model):
         """Tạo báo giá mới từ lệnh sửa chữa"""
         self.ensure_one()
 
-        # Kiểm tra điều kiện trước khi tạo
         if not self.partner_id:
             raise ValidationError('Vui lòng chọn khách hàng trước khi tạo báo giá!')
 
-        # Chuẩn bị giá trị cho báo giá
+        existing_sale_order = self.env['sale.order'].search([('origin', '=', self.name)], limit=1)
+
+        if existing_sale_order:
+            return {
+                'type': 'ir.actions.act_window',
+                'name': 'Báo giá',
+                'res_model': 'sale.order',
+                'view_mode': 'form',
+                'view_id': self.env.ref('nhom3_odoo_project.view_sale_order_form').id,
+                'res_id': existing_sale_order.id,
+                'target': 'current',
+            }
+
         sale_order_values = self._prepare_sale_order_values()
-
-        # Tạo báo giá mới
         sale_order = self.env['sale.order'].create(sale_order_values)
-
-        # Cập nhật thông tin địa chỉ từ partner
         sale_order._onchange_partner_id()
 
-        # Trả về action để mở báo giá vừa tạo
         return {
             'type': 'ir.actions.act_window',
             'name': 'Báo giá',

@@ -1,5 +1,5 @@
 {
-    'name': 'Lệnh sửa chữa',
+    'name': 'Repair Order',
     'version': '17.0.1.0',
     'author': 'Le Chinh Dai',
     'license': 'LGPL-3',
@@ -21,12 +21,22 @@
         'views/repair_order_smart_buttons_view.xml',
         'views/appointment_smart_buttons_view.xml',
         'views/tab_customer_vehicle_info_view.xml',
+        
+        
+        #region BẢNG GIÁ
+        'views/product_pricelist_views.xml',
+        'views/product_pricelist_item_views.xml', 
+        #endregion
+        
+        
         'views/tad_order_detail.xml',
         'views/tab_customer_signature.xml',
         'views/tab_other_info.xml',
         'views/menus.xml',
     ],
+    
     'installable': True,
     'application': True,
-    'sequence': 1
+    'auto_install': False,
+    'sequence': 1,  # Đưa Module lên đầu
 }
