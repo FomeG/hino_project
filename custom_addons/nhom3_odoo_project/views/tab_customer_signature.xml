@@ -1,14 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-    <record id="view_repair_order_form_inherit_service_info" model="ir.ui.view">
-        <field name="name">repair.order.form.inherit.service.info</field>
+    <record id="view_repair_order_form_inherit_signature" model="ir.ui.view">
+        <field name="name">repair.order.form.inherit.signature</field>
         <field name="model">repair.order</field>
         <field name="inherit_id" ref="repair.view_repair_order_form" />
         <field name="arch" type="xml">
             <xpath expr="//notebook" position="inside">
-                <page string="Customer Signature" name="customer_signature">
-
+                <page string="Customer Signature" name="customer_signature"
+                    invisible="not require_signature and not signed_by and not signature and not signed_on">
+                    <group>
+                        <field name="signed_by" readonly="signature" />
+                        <field name="signed_on" readonly="signature" />
+                        <field name="signature" widget="signature" />
+                        <field name="require_signature" invisible="1" />
+                    </group>
                 </page>
+                <h2>Chưa có gì, đang xem lại phần này, làm sau 🤣🤣🤣</h2>
+
             </xpath>
+
         </field>
     </record>
 </odoo>

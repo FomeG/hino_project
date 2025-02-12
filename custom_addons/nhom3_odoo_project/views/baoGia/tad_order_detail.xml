@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_tab_order_detail_inherit_history" model="ir.ui.view">
+            <field name="name">tab.order.detail.inherit.history</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>  <!-- Kế thừa form sale.order -->
+            <field name="arch" type="xml">
+                <!-- Chèn vào thẻ <notebook> trong form gốc -->
+                <xpath expr="//notebook" position="inside">
+                    <page string="Chi tiết đơn hàng" name="order_lines_tab">
+                        <field name="order_line">
+                            <tree editable="bottom">
+                                <!-- <field name="default_code"/> -->
+                                <!-- <field name="x_replacing_code"/> -->
+                                <field name="name"/>
+                                <!-- <field name="x_other_name"/> -->
+                                <field name="x_description"/>
+                                <field name="product_uom_qty" required="1"/>
+                                <field name="qty_delivered" invisible="1"/>
+                                <field name="qty_invoiced" invisible="1"/>
+                                <field name="product_uom" required="1"/>
+                                <field name="x_pricelist"/>
+                                <field name="price_unit" required="1"/>
+                                <field name="x_delivery_warehouse"/>
+                                <field name="x_hmv_percent"/>
+                                <field name="x_dealer_percent"/>
+                                <field name="x_discount"/>
+                                <field name="tax_id"/>
+                                <field name="price_subtotal"/>
+                                <field name="x_untaxed_amount"/>
+                                <field name="x_taxes"/>
+                                <field name="x_total"/>
+                                <field name="currency_id" column_invisible="1"/>
+                            </tree>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
