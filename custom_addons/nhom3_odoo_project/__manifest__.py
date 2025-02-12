@@ -19,7 +19,8 @@
         'views/vehicle_views.xml',
         'views/view.xml',
         'views/repair_order_list_view.xml',
-        'views/smart_buttons_view.xml',
+        'views/repair_order_smart_buttons_view.xml',
+        'views/appointment_smart_buttons_view.xml',
         'views/tab_customer_vehicle_info_view.xml',
 
         
@@ -31,6 +32,7 @@
         
         'views/tad_order_detail.xml',
         'views/tab_customer_signature.xml',
+        'views/tab_other_info.xml',
         'views/menus.xml',
     ],
     
