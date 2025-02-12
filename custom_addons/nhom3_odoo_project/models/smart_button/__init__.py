@@ -1,1 +1,1 @@
-from . import smart_buttons
+from . import smart_buttons, button_lsc
