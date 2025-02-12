@@ -23,6 +23,8 @@
         'views/tab_customer_vehicle_info_view.xml',
         
         
+        
+        
         #region BẢNG GIÁ
         'views/product_pricelist_views.xml',
         'views/product_pricelist_item_views.xml', 
