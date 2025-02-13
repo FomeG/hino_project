@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+
+        <record id="view_vendor_bill_form_inherit" model="ir.ui.view">
+            <field name="name">account.move.form.vendor.bill.inherit</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form" />
+            <field name="arch" type="xml">
+                <!-- Thay đổi tiêu đề form -->
+                <xpath expr="//form" position="attributes">
+                    <attribute name="string">Hóa đơn mua hàng</attribute>
+                </xpath>
+
+
+                <!-- <xpath expr="//div" position="inside">
+                    <button name="action_hoadonbanhang"
+                        type="object"
+                        class="oe_stat_button"
+                        icon="fa-file-text">
+                        <div class="o_stat_info">
+                            <span class="o_stat_text">Hoá đơn</span>
+                            <span class="o_stat_text">bán hàng</span>
+                        </div>
+                    </button>
+
+                    <button name="action_buttoantonghop"
+                        type="object"
+                        class="oe_stat_button"
+                        icon="fa-bars">
+                        <div class="o_stat_info">
+                            <span class="o_stat_text">Bút toán</span>
+                            <span class="o_stat_text">tổng hợp</span>
+                        </div>
+                    </button>
+                </xpath> -->
+
+
+                <!-- Thêm các trường mới vào group đầu tiên bên trái -->
+                <xpath expr="//group/group[1]" position="inside">
+                    <!-- <field name="x_dealer"/>
+                <field name="x_category"/>
+                <field name="x_type_of_order"/> -->
+                    <field name="x_bill_number" />
+                    <field name="x_form" />
+                    <field name="x_serial" />
+                    <field name="x_description" />
+                    <field name="x_source_document" />
+                </xpath>
+
+                <!-- Thêm các trường mới vào group đầu tiên bên phải -->
+                <xpath expr="//group/group[2]" position="inside">
+                    <field name="x_currency" />
+                    <!-- <field name="x_currency_rate"/> -->
+                    <!-- <field name="purchase_order_ids" widget="many2many_tags"/> -->
+                    <field name="x_type_of_vendor_bill" />
+                </xpath>
+
+                <!-- Điều chỉnh nhãn các trường -->
+                <xpath expr="//field[@name='invoice_date']" position="attributes">
+                    <attribute name="string">Ngày chứng từ</attribute>
+                </xpath>
+                <xpath expr="//field[@name='date']" position="attributes">
+                    <attribute name="string">Ngày hạch toán</attribute>
+                </xpath>
+                <xpath expr="//field[@name='invoice_date_due']" position="attributes">
+                    <attribute name="string">Ngày đến hạn</attribute>
+                </xpath>
+                <xpath expr="//field[@name='invoice_payment_term_id']" position="attributes">
+                    <attribute name="string">Chính sách thanh toán</attribute>
+                </xpath>
+                <xpath expr="//field[@name='journal_id']" position="attributes">
+                    <attribute name="string">Sổ nhật ký</attribute>
+                </xpath>
+                <xpath expr="//field[@name='partner_id']" position="attributes">
+                    <attribute name="string">Nhà cung cấp</attribute>
+                </xpath>
+
+
+                <xpath expr="//div[@name='button_box']" position="inside">
+                    
+                    <button name="action_hoadonbanhang" type="object"
+                        class="me-2 oe_stat_button border-2 border-primary bg-light text-primary"
+                        icon="fa-solid fa-receipt">
+                        <span>Hoá đơn bán hàng</span>
+                    </button>
+
+
+                    <button name="action_buttoantonghop" type="object"
+                        class="me-2 oe_stat_button border-2 border-primary bg-light text-primary"
+                        icon="fa-solid fa-pen-to-square">
+                        <span>Bút toán tổng hợp</span>
+                    </button>
+                </xpath>
+
+
+                <xpath expr="//header" position="replace">
+                    <header>
+                        <button name="action_approval_submission"
+                            type="object" string="Approval submission"
+                            class="oe_highlight" />
+                        <button name="action_cancel"
+                            type="object"
+                            string="Cancel" class="oe_highlight" />
+                        <button name="action_print"
+                            type="object"
+                            string="Print" class="oe_highlight" />
+                        <button name="action_approve"
+                            type="object"
+                            string="Approve" class="oe_highlight" />
+
+                        <button name="action_denial"
+                            type="object"
+                            string="Deny" class="oe_highlight" />
+
+
+                        <field name="state" widget="statusbar" />
+                    </header>
+                </xpath>
+
+
+            </field>
+
+
+        </record>
+
+
+        <record id="hmv_cashback_nghia" model="ir.actions.act_window">
+            <field name="name">Hoá đơn mua hàng</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">account.move</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_vendor_bill_form_inherit" />
+            <field name="context">{'default_move_type': 'in_invoice'}</field>
+        </record>
+
+
+    </data>
+
+
+</odoo>

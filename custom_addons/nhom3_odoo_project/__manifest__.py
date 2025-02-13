@@ -32,7 +32,22 @@
         'views/tad_order_detail.xml',
         'views/tab_customer_signature.xml',
         'views/tab_other_info.xml',
+        
+        
+        
+        
+        
+        'views/hoadonmua_view.xml',
+        
+        
+        
+        
+        
+        
         'views/menus.xml',
+        
+        
+        # 'data/vendor_bill_sequence.xml',
     ],
     
     'installable': True,
