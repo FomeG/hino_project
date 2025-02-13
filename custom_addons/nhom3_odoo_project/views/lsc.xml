@@ -6,17 +6,33 @@
             <field name="model">sale.order</field>
             <field name="inherit_id" ref="view_sale_order_form"/>
             <field name="arch" type="xml">
+                <xpath expr="//div" position="inside">
+                    <button name="action_smart_button_delivery"
+                            type="object"
+                            class="me-2 oe_stat_button border-2 border-green-500 bg-green-100 text-green-700"
+                            icon="fa-truck">
+                        <span>Delivery</span>
+                    </button>
+                    <button name="action_smart_button_create_invoice"
+                            type="object"
+                            class="me-2 oe_stat_button border-2 border-blue-500 bg-blue-100 text-blue-700"
+                            icon="fa-calendar">
+                        <span>Invoice</span>
+                    </button>
+                </xpath>
                 <xpath expr="//header" position="inside">
-                    <button name="action_button_one"
+                    <button name="action_button_delivery"
                             string="Delivery"
                             type="object"
-                            class="oe_highlight"/>
-                    <button name="action_button_two"
-                            string="Invoice"
-                            type="object"/>
-                    <button name="action_button_three"
-                            string=""
-                            type="object"/>
+                            class="oe_highlight btn-warning"/>
+                    <button name="action_button_create_invoice"
+                            string="Create Invoice"
+                            type="object"
+                            class="oe_highlight btn-success"/>
+                    <button name="action_button_cancel"
+                            string="Cancel"
+                            type="object"
+                            class="oe_highlight btn-secondary"/>
                 </xpath>
             </field>
         </record>

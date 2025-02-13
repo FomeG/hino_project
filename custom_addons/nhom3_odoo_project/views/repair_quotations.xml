@@ -15,10 +15,10 @@
         <field name="name">Repair Quotes</field>
         <field name="res_model">sale.order</field>
         <field name="view_mode">tree,form</field>
-        <field name="view_ids" eval="[(5,0,0),
+       <field name="view_ids" eval="[(5,0,0),
             (0,0,{'view_mode': 'tree', 'view_id': ref('view_sale_order_list')}),
             (0,0,{'view_mode': 'form', 'view_id': ref('view_sale_order_form')})
-            ]"/>
+        ]"/>
     </record>
 
     <record id="action_repair_orders_lsc" model="ir.actions.act_window">
@@ -28,7 +28,7 @@
         <field name="view_ids" eval="[(5,0,0),
             (0,0,{'view_mode': 'tree', 'view_id': ref('view_sale_order_list')}),
             (0,0,{'view_mode': 'form', 'view_id': ref('view_sale_order_form_inherit_lsc')})
-            ]"/>
+        ]"/>
     </record>
 
     <record id="action_repair_payment_request" model="ir.actions.act_window">
