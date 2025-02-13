@@ -5,12 +5,12 @@
         <record id="view_repair_sale_order_form_inherit_electronic_invoice" model="ir.ui.view">
             <field name="name">repair.sale.order.form.inherit.electronic.invoice</field>
             <field name="model">sale.order</field>
-            <field name="inherit_id" ref="nhom3_odoo_project.view_sale_order_form"/>
+            <field name="inherit_id" ref="view_sale_order_form"/>
             <field name="arch" type="xml">
                 <!-- Chèn tab mới vào cuối sheet -->
                 <xpath expr="//sheet" position="inside">
                     <notebook>
-                   <page string="Hoá đơn điện tử - Electronic Invoice" name="order_lines_tab">
+                        <page string="Hoá đơn điện tử - Electronic Invoice" name="order_lines_tab">
                             <group>
                                 <label for="x_electronic_invoice" string="Xuất hoá đơn điện tử - Issue Electronic Invoice"/>
                                 <field name="x_electronic_invoice"
