@@ -13,47 +13,23 @@
                     <attribute name="string">Hóa đơn mua hàng</attribute>
                 </xpath>
 
-
-                <!-- <xpath expr="//div" position="inside">
-                    <button name="action_hoadonbanhang"
-                        type="object"
-                        class="oe_stat_button"
-                        icon="fa-file-text">
-                        <div class="o_stat_info">
-                            <span class="o_stat_text">Hoá đơn</span>
-                            <span class="o_stat_text">bán hàng</span>
-                        </div>
-                    </button>
-
-                    <button name="action_buttoantonghop"
-                        type="object"
-                        class="oe_stat_button"
-                        icon="fa-bars">
-                        <div class="o_stat_info">
-                            <span class="o_stat_text">Bút toán</span>
-                            <span class="o_stat_text">tổng hợp</span>
-                        </div>
-                    </button>
-                </xpath> -->
-
-
                 <!-- Thêm các trường mới vào group đầu tiên bên trái -->
                 <xpath expr="//group/group[1]" position="inside">
-                    <!-- <field name="x_dealer"/>
-                <field name="x_category"/>
-                <field name="x_type_of_order"/> -->
+                    <field name="x_dealer" />
+                    <field name="x_category" />
+                    <!-- <field name="x_type_of_order"/> -->
                     <field name="x_bill_number" />
                     <field name="x_form" />
                     <field name="x_serial" />
                     <field name="x_description" />
                     <field name="x_source_document" />
+                    <field name="x_currency" />
+                    <field name="x_currency_rate" />
                 </xpath>
 
                 <!-- Thêm các trường mới vào group đầu tiên bên phải -->
                 <xpath expr="//group/group[2]" position="inside">
-                    <field name="x_currency" />
-                    <!-- <field name="x_currency_rate"/> -->
-                    <!-- <field name="purchase_order_ids" widget="many2many_tags"/> -->
+
                     <field name="x_type_of_vendor_bill" />
                 </xpath>
 
@@ -79,18 +55,23 @@
 
 
                 <xpath expr="//div[@name='button_box']" position="inside">
-                    
+
                     <button name="action_hoadonbanhang" type="object"
                         class="me-2 oe_stat_button border-2 border-primary bg-light text-primary"
                         icon="fa-solid fa-receipt">
-                        <span>Hoá đơn bán hàng</span>
+                        <span>Sale Invoices</span>
                     </button>
 
+                    <button name="action_view_purchase_invoices" type="object"
+                        class="me-2 oe_stat_button border-2 border-primary bg-light text-primary"
+                        icon="fa-solid fa-receipt">
+                        <span>Purchase Invoices</span>
+                    </button>
 
                     <button name="action_buttoantonghop" type="object"
                         class="me-2 oe_stat_button border-2 border-primary bg-light text-primary"
                         icon="fa-solid fa-pen-to-square">
-                        <span>Bút toán tổng hợp</span>
+                        <span>Summary Entry</span>
                     </button>
                 </xpath>
 
@@ -120,6 +101,16 @@
                 </xpath>
 
 
+                <xpath expr="//div[@name='button_box']" position="after">
+                    <button name="action_payment_approval"
+                        type="object" string="Payment approval"
+                        class="oe_highlight me-1 mb-3" />
+                    <button name="ac_cancel"
+                        type="object"
+                        string="Cancel" class="oe_highlight mb-3" />
+                </xpath>
+
+
             </field>
 
 
@@ -127,7 +118,7 @@
 
 
         <record id="hmv_cashback_nghia" model="ir.actions.act_window">
-            <field name="name">Hoá đơn mua hàng</field>
+            <field name="name">Sale Invoices</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">account.move</field>
             <field name="view_mode">tree,form</field>

@@ -16,11 +16,11 @@ class AccountMove_Nghia(models.Model):
         required=True
     )
     
-    x_type_of_order = fields.Many2one(
-        'purchase.order.type',
-        string='Type of order',
-        required=True
-    )
+    # x_type_of_order = fields.Many2one(
+    #     'purchase.order.type',
+    #     string='Type of order',
+    #     required=True
+    # )
     
     x_bill_number = fields.Char(
         string='Bill number'
@@ -50,10 +50,10 @@ class AccountMove_Nghia(models.Model):
     )
     
     
-    # x_currency_rate = fields.Many2one(
-    #     'res.currency.rate',
-    #     string='Currency Rate',
-    # )
+    x_currency_rate = fields.Many2one(
+        'res.currency.rate',
+        string='Currency Rate',
+    )
     
     
     # x_currency_rate = fields.Float(
@@ -123,18 +123,14 @@ class AccountMove_Nghia(models.Model):
     #             self.x_source_document = ', '.join(po_names)
                 
                 
-                
-    def action_hoadonbanhang(self):
-        pass
-    
-    def action_buttoantonghop(self):
-        pass
+
     
     def action_approval_submission(self):
         self.write({'state': 'approval'})
 
     def action_cancel(self):
-        self.write({'state': 'cancelled'})
+        return
+        # self.write({'state': 'cancel'})
 
     def action_print(self):
         return self.env.ref('account.account_invoices').report_action(self)
@@ -146,3 +142,14 @@ class AccountMove_Nghia(models.Model):
         self.write({'state': 'draft'})
     
     
+    
+    
+    
+    def action_payment_approval(self):
+        pass
+    
+    
+    
+    
+    def ac_cancel(self):
+        pass
