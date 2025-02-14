@@ -1,0 +1,13 @@
+<!-- <odoo>
+    <data>
+<record id="warranty_assets" model="ir.asset">
+    <field name="name">Warranty Request Assets</field>
+    <field name="bundle">web.assets_backend</field>
+    <field name="active" eval="True"/>
+    <field name="files" eval="[ '/nhom3_odoo_project/static/src/scss/warrently_request.scss' ]"/>
+</record>
+
+
+    </data>
+</odoo> -->
+<!-- E:\Odoo\Odoo17_normal\odoo-17.0\hino_project\custom_addons\static\scr\css\warrently_request.scss -->
