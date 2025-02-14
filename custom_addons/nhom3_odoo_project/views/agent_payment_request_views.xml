@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_warranty_request_form" model="ir.ui.view">
+            <field name="name">warranty.request.form</field>
+            <field name="model">warranty.request</field>
+            <field name="arch" type="xml">
+                <form string="Warranty Request">
+                    <header>
+                        <button name="action_send_approval" type="object" string="Gửi duyệt" class="btn-primary"/>
+                        <button name="action_cancel" type="object" class="oe_stat_button border-2 border-warning bg-light text-warning" icon="fa-user-circle">
+                            <span>Cancel</span>
+                        </button>
+                        <button name="action_print" type="object" class="oe_stat_button border-2 border-info bg-light text-info" icon="fa-external-link">
+                            <span>Print</span>
+                        </button>
+                        <button name="action_approve" type="object" class="oe_stat_button border-2 border-success bg-light text-success" icon="fa-file-text-o">
+                            <span>Approve</span>
+                        </button>
+                        <button name="action_reject" type="object" class="oe_stat_button border-2 border-danger bg-light text-danger" icon="fa-comments">
+                            <span>Reject</span>
+                        </button>
+                        <field name="x_status" widget="statusbar" statusbar_visible="draft,rejected,in_progress,approved,cancelled"/>
+                    </header>
+                    <sheet>
+                        <div style="background-color: #d3d3d3; border: 1px solid #ccc; text-align: center; padding: 10px;">
+                            <h1>Warranty Request Number: <field name="x_warranty_request_number" nolabel="1" readonly="1"/></h1>
+                        </div>
+                        <group col="4" string="Repair Ticket">
+                            <group>
+                                    <group>
+                                    <field name="x_repair_number" string="Warranty Repair Voucher:" class="underline-input"/>
+                                    <label for="x_repair_number" string="Ngày hoàn thành sửa chữa bảo hành" class="o_form_label text-danger"/>
+                                </group>
+
+
+                                <field name="x_number" string="Number" class="underline-input"/>
+                            
+                            </group>
+                            <group>
+                                <field name="x_warranty_request_date" string="Warranty Request Date"/>
+                                <field name="x_warranty_submission_date" string="Warranty Submission Date"/>
+                                <field name="x_damaged_date" string="Damaged Date"/>
+                            </group>
+                            <group>
+                                <field name="x_hmv_check" string="HNM check"/>
+                                <field name="x_warranty_category" string="Warranty Category"/>
+
+
+                               
+                            </group>
+                            <group>
+                                <field name="x_dealer_phone" string="Dealer Phone"/>
+                                <field name="x_dealer_report" string="Dealer report"/>
+
+                            
+                            </group>
+                        </group>
+                   
+                        <group>
+                            <group col="2" string="Vehicle Information">
+                                <group>
+                                    <field name="x_repair_order" string="Repair Order"/>
+                                    <field name="vin" string="VIN"/>
+                                    <field name="x_engine" string="Engine"/>
+                                    <field name="x_plate_number" string="Plate Number"/>
+                                    <field name="x_warranty_expiry_date" string="Warranty expiry date"/>
+
+                                </group>
+                            </group>
+                            <group col="2" string="Vehicle Owner Name">
+                                <group>
+                                    <!-- <field name="x_dealer_report_date" string="Dealer Report Date"/> -->
+                                    <field name="x_owner_name" string="Owner Name"/>
+                                    <field name="x_address" string="Address"/>
+                                    <field name="x_tel" string="Telephone"/>
+                                    <field name="x_driver" string="Driver"/>
+                                    <field name="x_driver_phone" string="Driver Phone"/>
+                                </group>
+                            </group>
+                        </group>
+
+
+                        <group>
+                            <group col="2" string="Detail">
+                                <group>
+                                    <field name="x_km_damaged" string="Km damaged"/>
+                                    <field name="x_phenomenon" string="Phenomenon"/>
+                                    <field name="x_causes_of_damaged" string="Causes"/>
+                                    <field name="x_not_genuine_spare_parts" string="not genuine spare parts"/>
+                                    <field name="x_dealer_comment" string="Dealer comment"/>
+                                    <field name="x_factory_comment" string="Factory comment"/>
+                            
+
+                                </group>
+                            </group>
+                            <group col="2" string="">
+                                <group>
+                                    <!-- <field name="x_dealer_report_date" string="Dealer Report Date"/> -->
+                                    <field name="x_damaged_part" string="Damaged part"/>
+                                    <field name="x_impact_part" string="Impact Part"/>
+                                    <field name="x_customer_comment" string="Customer Comment"/>
+                                    <field name="x_return_part_to_factory" string="Return Part to Factory"/>
+                                    <field name="x_reason" string="Reason"/>
+                                </group>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Opinions">
+                                <group>
+                                    <field name="x_dealer_opinion" string="Dealer Opinion" colspan="2"/>
+                                    <field name="x_factory_opinion" string="Factory Opinion" colspan="2"/>
+                                </group>
+                            </page>
+                            <page string="Validity">
+                                <group>
+                                    <field name="x_remaining_validity_days" string="Remaining Validity Days"/>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+
+
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="activity_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+
+        <!-- List View cho Warranty Request -->
+        <record id="view_warranty_request_tree" model="ir.ui.view">
+            <field name="name">warranty.request.tree</field>
+            <field name="model">warranty.request</field>
+            <field name="arch" type="xml">
+                <tree string="Warranty Requests">
+                <field name="x_warranty_request_number" string="Warranty Request Number"/>
+                <field name="x_repair_order" string="Repair Order"/>
+                <field name="vin" string="VIN"/>
+                <field name="x_dealer_report_date" string="Dealer Report Date"/>
+                <field name="x_owner_name" string="Owner Name"/>
+                <field name="x_submission_count" string="Submission Count"/>
+                <field name="x_status" string="Status"
+                 decoration-warning="x_status == 'approved'" 
+                   decoration-info="x_status == 'in_progress'"
+                />
+                </tree>
+            </field>
+        </record>
+    </data>
+</odoo>
