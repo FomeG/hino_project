@@ -7,12 +7,13 @@
     'data': [
         'security/ir.model.access.csv',
         'views/repair_sale_orer_form.xml',
+        'views/lsc.xml',
         'views/bg_hoadondt_view.xml',
         'views/repair_quotations.xml',
         # 'views/repair_order_view.xml',
         # 'views/repair_order_vehicle_views.xml',
         'views/tab_repair_history_views.xml',
-        'views/tab_service_info_worklist_service_views.xml',
+        # 'views/tab_service_info_worklist_service_views.xml',
         'views/tab_promotions_program_views.xml',
         'views/tab_sale_order.xml',
         'views/vehicle_views.xml',
@@ -22,6 +23,8 @@
         'views/appointment_smart_buttons_view.xml',
         'views/tab_customer_vehicle_info_view.xml',
         
+        'views/tab_service_info_worklist_service_views.xml',
+
         
         
         
@@ -29,14 +32,32 @@
         'views/product_pricelist_views.xml',
         'views/product_pricelist_item_views.xml', 
         #endregion
-        
+        'views/agent_payment_request_views.xml',
+
         
         'views/tad_order_detail.xml',
         'views/tab_customer_signature.xml',
         'views/tab_other_info.xml',
+        
+        
+        
+        
+        
+        'views/hoadonmua_view.xml',
+        
+        
+        
+        
+        
+        
         'views/menus.xml',
+        
+        
+        # 'data/vendor_bill_sequence.xml',
+        'views/agent_payment_request_views.xml',
+
     ],
-    
+   
     'installable': True,
     'application': True,
     'auto_install': False,

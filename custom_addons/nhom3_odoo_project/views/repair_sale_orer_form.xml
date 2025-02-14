@@ -4,24 +4,30 @@
         <record id="view_sale_order_form" model="ir.ui.view">
             <field name="name">sale.order.form.inherit</field>
             <field name="model">sale.order</field>
+            <field name="priority">10</field>
             <field name="arch" type="xml">
                 <form>
-                    <header position="inside">
-                        <button name="action_view_partner_repair_orders"
-                                string="Repair Order"
-                                type="object"
-                                class="oe_highlight"/>
+                    <title>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="action_view_partner_repair_orders"
+                                    type="object"
+                                    class="me-2 oe_stat_button border-2 border-secondary bg-light text-primary">
+                                <span>Repair Order</span>
+                            </button>
+                        </div>
+                    </title>
+
+                    <header>
+
                     </header>
-                    <sheet position="replace">
-
-                        <sheet>
-
+                    <sheet>
                             <h1>
                                 <field name="name" readonly="1" placeholder="SO/2024/0001"/>
                             </h1>
                             <!-- Two column layout -->
                             <group>
                                 <group>
+                                    <field name="x_lsc" string="LSC user"/>
                                     <!-- Left column -->
                                     <field name="partner_id" string="Khách hàng" options="{'no_create': True, 'no_open': True}"/>
                                     <field name="company_id" invisible="1"/>
@@ -46,7 +52,7 @@
                                     <field name="description" string="Diễn giải"/>
                                 </group>
                             </group>
-                        </sheet>
+
                     </sheet>
 
                     <div class="oe_chatter" position="inside">

@@ -5,25 +5,25 @@ class ElectronicInvoice(models.Model):
 
     x_electronic_invoice = fields.Boolean(
         string="Electronic Invoice",
-        help="Cho phép tích chọn hoặc không để thực hiện xuất hoá đơn điện tử"
+        help="Allow selection to issue an electronic invoice"
     )
     x_invoiced_company = fields.Char(
         string="Invoiced Company",
-        help="Tên Công ty xuất HD",
+        help="Name of the company issuing the invoice",
     )
     x_invoice_address = fields.Char(
         string="Invoice Address",
-        help="Địa chỉ xuất HĐ",
+        help="Invoice issuing address",
     )
     x_tax_code = fields.Char(
         string="Tax Code",
-        help="Mã số thuế xuất HĐ",
+        help="Tax identification number for invoicing",
     )
     x_buyer = fields.Char(
         string="Buyer",
-        help="Người mua hàng",
+        help="Purchaser's name",
     )
     x_email_received_invoice = fields.Char(
         string="Email Received Invoice",
-        help="Email nhận HĐ",
+        help="Email address for receiving the invoice",
     )

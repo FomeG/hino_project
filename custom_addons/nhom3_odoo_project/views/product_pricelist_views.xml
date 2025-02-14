@@ -26,22 +26,29 @@
                 <sheet>
                     <group>
                         <field name="name" />
-                        <field name="currency_id" options="{'no_create': True}" />
                         <field name="discount_policy" />
                         <field name="company_id" groups="base.group_multi_company" />
                     </group>
                 </sheet>
             </form>
+
+
         </field>
     </record>
 
-
-    <!-- Kế thừa và chỉnh sửa form view gốc -->
+ython    <!-- Kế thừa và chỉnh sửa form view gốc -->
     <record id="view_product_pricelist_form_inherit" model="ir.ui.view">
         <field name="name">product.pricelist.form.inherit</field>
         <field name="model">product.pricelist</field>
         <field name="inherit_id" ref="product.product_pricelist_view" />
         <field name="arch" type="xml">
+
+            <xpath expr="//group[@name='pricelist_settings']/field[@name='company_id']"
+                position="before">
+
+                <field name="currency_id" options="{'no_create': True}" />
+
+            </xpath>
             <!-- Thêm các trường mới vào tree view của item_ids -->
             <xpath expr="//field[@name='item_ids']/tree[1]" position="attributes">
                 <attribute name="editable">bottom</attribute>

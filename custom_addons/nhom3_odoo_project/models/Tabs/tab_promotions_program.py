@@ -1,9 +1,10 @@
-from odoo import api, fields, models
+from odoo import api, fields, models, _
+from odoo.exceptions import ValidationError
 
 class RepairOrder(models.Model):
     _inherit = 'repair.order'
 
-    vehicle_id = fields.Many2one('fleet.vehicle', string='VIN Number', required=True)
+    x_vehicle_plate = fields.Many2one('vehicle.information', string='Vehicle Information', required=True)
     x_km_at_repair = fields.Float(string='KM at Repair', required=True)
     x_pricelist_id = fields.Many2one(
         'product.pricelist',
@@ -12,38 +13,51 @@ class RepairOrder(models.Model):
         store=True
     )
 
-
-    @api.depends('partner_id', 'vehicle_id', 'x_km_at_repair')
+    @api.depends('partner_id', 'x_vehicle_plate', 'x_km_at_repair')
     def _compute_applicable_pricelist(self):
         """
         Compute the applicable price list based on:
         - Customer (partner_id)
-        - Vehicle (vehicle_id)
+        - Vehicle (x_vehicle_plate)
         - Current mileage (x_km_at_repair)
         """
         for record in self:
-            # Search for applicable price lists
-            pricelist = self.env['product.pricelist'].search([
-                '|',
-                ('applies_to_customer', '=', record.partner_id.id),
-                '|',
-                ('applies_to_vehicle', '=', record.vehicle_id.id),
-                ('applies_to_km', '<=', record.x_km_at_repair)
-            ], limit=1)
+            # Initialize domain for pricelist search
+            domain = ['|',
+                     '|',
+                     # Customer conditions
+                     '&',
+                     ('x_apply_for', '=', 'specific'),
+                     ('x_customer_ids', 'in', record.partner_id.id),
+                     # Vehicle conditions
+                     '&',
+                     ('x_apply_for_vehicles', '=', 'specific'),
+                     ('x_vehicle_ids', 'in', record.x_vehicle_plate.id),
+                     # Kilometer conditions
+                     '&',
+                     ('x_from_km', '<=', record.x_km_at_repair),
+                     '|',
+                     ('x_to_km', '=', 0),
+                     ('x_to_km', '>=', record.x_km_at_repair)]
+
+            # Search for applicable pricelist
+            pricelist = self.env['product.pricelist'].search(
+                domain,
+                order='create_date desc',
+                limit=1
+            )
 
             record.x_pricelist_id = pricelist.id if pricelist else False
 
-    @api.model
-    def create(self, vals):
-        """Override create to ensure pricelist is computed on creation"""
-        res = super(RepairOrder, self).create(vals)
-        res._compute_applicable_pricelist()
-        return res
+    @api.onchange('x_vehicle_plate')
+    def _onchange_vehicle_plate(self):
+        """Update partner when vehicle information changes"""
+        if self.x_vehicle_plate:
+            self.partner_id = self.x_vehicle_plate.owner_info
 
-    def write(self, vals):
-        """Override write to ensure pricelist is recomputed when relevant fields change"""
-        res = super(RepairOrder, self).write(vals)
-
-        if any(field in vals for field in ['partner_id', 'vehicle_id', 'x_km_at_repair']):
-            self._compute_applicable_pricelist()
-        return res
+    @api.constrains('x_km_at_repair')
+    def _check_km_at_repair(self):
+        """Validate repair kilometer value"""
+        for record in self:
+            if record.x_km_at_repair < 0:
+                raise ValidationError(_('Repair kilometer cannot be negative'))
