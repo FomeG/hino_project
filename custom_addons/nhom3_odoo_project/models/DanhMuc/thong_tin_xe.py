@@ -50,7 +50,7 @@ class VehicleInformation(models.Model):
     note = fields.Text(string='Note', tracking=True)
 
     # Thông tin bảo hành
-    approved_warranty_reg = fields.Boolean(string='Approved warranty reg', tracking=True)
+    approved_warranty_reg = fields.Boolean(string='Approved warranty', tracking=True)
     warranty_registrator = fields.Boolean(string='Warranty registrator', default=True, tracking=True)
     booklet_number = fields.Char(string='Booklet number', tracking=True)
     bdmp_to_km = fields.Float(string='Free main to kms', tracking=True)

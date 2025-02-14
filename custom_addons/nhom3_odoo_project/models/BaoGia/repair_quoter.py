@@ -112,7 +112,7 @@ class SaleOrder(models.Model):
     )
 
     description = fields.Text('Description')
-
+    x_lsc = fields.Boolean(string="LSC user", default=False)
 
 
     @api.model

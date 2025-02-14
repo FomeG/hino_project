@@ -24,97 +24,101 @@
         <field name="model">vehicle.information</field>
         <field name="arch" type="xml">
             <form string="Vehicle Information">
-                <header>
+                 <header>
                     <button name="action_approve_warranty"
-                            string="Duyệt đăng ký bảo hành"
+                            string="Approve warranty"
                             type="object"
-                            class="oe_highlight"
+                            class="oe_highlight btn-success"
                             invisible="approved_warranty_reg, '=', True"/>
                 </header>
-                <group>
-                    <group string="Thông tin header chứng từ">
-                        <field name="import_date"/>
-                        <field name="line_of_date"/>
-                        <field name="date_to_dealer"/>
-                        <field name="company_id"/>
-                        <field name="original_id"/>
-                        <field name="sales_order_id"/>
-                    </group>
-                </group>
-
-                <group>
-                    <group string="Thông tin chung">
-                        <group>
-                            <field name="vin"/>
-                            <field name="series_id"/>
-                            <field name="engine_number"/>
-                            <field name="name"/>
-                            <field name="carbin_certificate_date"/>
-                            <field name="carbin_certificate_number"/>
-                            <field name="body_type_id"/>
-                            <field name="body_marker"/>
-                            <field name="front_axle"/>
-                            <field name="f_r_axle"/>
-                            <field name="rear_axle"/>
-                        </group>
-                        <group>
-                            <field name="lot"/>
-                            <field name="model_list_id"/>
-                            <field name="payload"/>
-                            <field name="pdi_date"/>
-                            <field name="kms_at_pdi"/>
-                            <field name="key_number"/>
-                            <field name="color"/>
-                            <field name="cylinder_no"/>
-                            <field name="trans_number"/>
-                            <field name="f_r_diff"/>
-                            <field name="rear_diff"/>
-                            <field name="battery_1"/>
-                            <field name="battery_2"/>
-                        </group>
-                        <field name="note" nolabel="1" placeholder="Ghi chú..."/>
-                    </group>
-
-
-                    <group string="Thông tin bảo hành">
-                        <group>
-                            <field name="approved_warranty_reg"/>
-                            <field name="warranty_registrator"/>
-                            <field name="booklet_number"/>
-                            <field name="bdmp_to_km"/>
-                            <field name="dmmp_count"/>
-                            <field name="warranty_register_date"/>
-                            <field name="warranty_expire_date"/>
-                            <field name="odometer_reading"/>
-                            <field name="customer_delivery_date"/>
-                        </group>
-                        <field name="warranty_note" nolabel="1" placeholder="Ghi chú bảo hành..."/>
-                    </group>
-
-                </group>
-                <group string="Thông tin khách hàng">
+                <sheet>
                     <group>
+
                         <group>
-                            <field name="owner_info"/>
-                            <field name="owner_name"/>
-                            <field name="address"/>
-                            <field name="identification_number"/>
-                            <field name="tax_code"/>
-                            <field name="contact_phone"/>
-                            <field name="driver"/>
+                            <field name="import_date"/>
+                            <field name="line_of_date"/>
+                            <field name="company_id"/>
                         </group>
                         <group>
-                            <field name="driver_phone"/>
-                            <field name="fax"/>
-                            <field name="contact"/>
-                            <field name="contact_phone_2"/>
-                            <field name="vehicle_ownership_date"/>
-                            <field name="customer_type"/>
-                            <field name="business"/>
+                            <field name="date_to_dealer"/>
+                            <field name="original_id"/>
+                            <field name="sales_order_id"/>
                         </group>
                     </group>
-                </group>
 
+                    <group>
+                        <group string="General information">
+                            <group>
+                                <field name="vin"/>
+                                <field name="series_id"/>
+                                <field name="engine_number"/>
+                                <field name="name"/>
+                                <field name="carbin_certificate_date"/>
+                                <field name="carbin_certificate_number"/>
+                                <field name="body_type_id"/>
+                                <field name="body_marker"/>
+                                <field name="front_axle"/>
+                                <field name="f_r_axle"/>
+                                <field name="rear_axle"/>
+                            </group>
+                            <group>
+                                <field name="lot"/>
+                                <field name="model_list_id"/>
+                                <field name="payload"/>
+                                <field name="pdi_date"/>
+                                <field name="kms_at_pdi"/>
+                                <field name="key_number"/>
+                                <field name="color"/>
+                                <field name="cylinder_no"/>
+                                <field name="trans_number"/>
+                                <field name="f_r_diff"/>
+                                <field name="rear_diff"/>
+                                <field name="battery_1"/>
+                                <field name="battery_2"/>
+                            </group>
+                            <field name="note" nolabel="1" placeholder="Ghi chú..."/>
+                        </group>
+
+
+                        <group string="Warranty information">
+                            <group>
+                                <field name="approved_warranty_reg"/>
+                                <field name="warranty_registrator"/>
+                                <field name="booklet_number"/>
+                                <field name="bdmp_to_km"/>
+                                <field name="dmmp_count"/>
+                                <field name="warranty_register_date"/>
+                                <field name="warranty_expire_date"/>
+                                <field name="odometer_reading"/>
+                                <field name="customer_delivery_date"/>
+                            </group>
+                            <field name="warranty_note" nolabel="1" placeholder="Ghi chú bảo hành..."/>
+                        </group>
+
+                    </group>
+                    <group string="Customer information">
+                        <group>
+                            <group>
+                                <field name="owner_info"/>
+                                <field name="owner_name"/>
+                                <field name="address"/>
+                                <field name="identification_number"/>
+                                <field name="tax_code"/>
+                                <field name="contact_phone"/>
+                                <field name="driver"/>
+                            </group>
+                            <group>
+                                <field name="driver_phone"/>
+                                <field name="fax"/>
+                                <field name="contact"/>
+                                <field name="contact_phone_2"/>
+                                <field name="vehicle_ownership_date"/>
+                                <field name="customer_type"/>
+                                <field name="business"/>
+                            </group>
+                        </group>
+                    </group>
+                </sheet>
                 <div class="oe_chatter">
                     <field name="message_follower_ids"/>
                     <field name="activity_ids"/>

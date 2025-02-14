@@ -10,28 +10,29 @@
                 <!-- Chèn tab mới vào cuối sheet -->
                 <xpath expr="//sheet" position="inside">
                     <notebook>
-                        <page string="Hoá đơn điện tử - Electronic Invoice" name="order_lines_tab">
+
+                   <page string="Electronic Invoice" name="order_lines_tab">
                             <group>
-                                <label for="x_electronic_invoice" string="Xuất hoá đơn điện tử - Issue Electronic Invoice"/>
+                                <label for="x_electronic_invoice" string="E-Invoice"/>
                                 <field name="x_electronic_invoice"
-                                       string="Lấy HD VAT - Electronic Invoice"
-                                       help="Cho phép tích chọn hoặc không để thực hiện xuất hoá đơn điện tử"
+                                       string="Electronic Invoice"
+                                      help="Allow selection to issue an electronic invoice"
                                        nolabel="1"/>
                                 <group invisible="not x_electronic_invoice">
                                     <field name="x_invoiced_company"
-                                           string="Tên Công ty xuất HD - Invoiced Company"
+                                           string="Invoiced Company"
                                            required="x_electronic_invoice"/>
                                     <field name="x_invoice_address"
-                                           string="Địa chỉ xuất HĐ - Invoice Address"
+                                           string="Invoice Address"
                                            required="x_electronic_invoice"/>
                                     <field name="x_tax_code"
-                                           string="Mã số thuế xuất HĐ - Tax Code"
+                                           string="Tax Code"
                                            required="x_electronic_invoice"/>
                                     <field name="x_buyer"
-                                           string="Người mua hàng - Buyer"
+                                           string="Buyer"
                                            required="x_electronic_invoice"/>
                                     <field name="x_email_received_invoice"
-                                           string="Email nhận HĐ - Email Received Invoice"
+                                           string="Email Received Invoice"
                                            required="x_electronic_invoice"/>
                                 </group>
                             </group>
