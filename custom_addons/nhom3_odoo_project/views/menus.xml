@@ -65,14 +65,6 @@
                     sequence="30" />
 
 
-    <!-- Menu Price List -->
-    <!-- Menu Hoá đơn mua hàng -->
-    <menuitem id="menu_hmv_cashback"
-        name="Hoá đơn mua hàng"
-        parent="menu_repair_payment_request"
-        action="hmv_cashback_nghia"
-        sequence="40" />
-
     <!-- Menu Lệnh sửa chữa -->
     <menuitem id="menu_product_pricelist"
         name="Price List"

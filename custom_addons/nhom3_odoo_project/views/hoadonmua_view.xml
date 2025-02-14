@@ -58,45 +58,48 @@
 
                     <button name="action_hoadonbanhang" type="object"
                         class="me-2 oe_stat_button border-2 border-primary bg-light text-primary"
-                        icon="fa-solid fa-receipt">
+                        icon="fa-receipt">
                         <span>Sale Invoices</span>
                     </button>
 
                     <button name="action_view_purchase_invoices" type="object"
                         class="me-2 oe_stat_button border-2 border-primary bg-light text-primary"
-                        icon="fa-solid fa-receipt">
+                        icon="fa-receipt">
                         <span>Purchase Invoices</span>
                     </button>
 
                     <button name="action_buttoantonghop" type="object"
                         class="me-2 oe_stat_button border-2 border-primary bg-light text-primary"
-                        icon="fa-solid fa-pen-to-square">
+                        icon="fa-pen-to-square">
                         <span>Summary Entry</span>
                     </button>
                 </xpath>
 
 
-                <xpath expr="//header" position="replace">
+                <xpath expr="//header//field[@name='state']" position="replace">
+                    <field name="state" widget="statusbar" class="mt-2" />
+                </xpath>
+
+
+                <xpath expr="//header" position="inside">
                     <header>
                         <button name="action_approval_submission"
                             type="object" string="Approval submission"
-                            class="oe_highlight" />
-                        <button name="action_cancel"
+                            class="oe_highlight mt-2" />
+                        <!-- <button name="action_cancel"
                             type="object"
-                            string="Cancel" class="oe_highlight" />
+                            string="Cancel" class="oe_highlight" /> -->
                         <button name="action_print"
                             type="object"
-                            string="Print" class="oe_highlight" />
+                            string="Print" class="oe_highlight mt-2" />
                         <button name="action_approve"
                             type="object"
-                            string="Approve" class="oe_highlight" />
+                            string="Approve" class="oe_highlight mt-2" />
 
                         <button name="action_denial"
                             type="object"
-                            string="Deny" class="oe_highlight" />
+                            string="Deny" class="oe_highlight mt-2" />
 
-
-                        <field name="state" widget="statusbar" />
                     </header>
                 </xpath>
 

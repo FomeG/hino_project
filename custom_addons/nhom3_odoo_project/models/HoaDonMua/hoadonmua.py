@@ -98,13 +98,15 @@ class AccountMove_Nghia(models.Model):
         return super().copy(default)
     
     
-    state = fields.Selection([
-            ('draft', 'Draft'),
-            ('approval', 'Waiting Approval'),
-            ('approved', 'Approved'),
-            ('done', 'Done'),
-        ], string='Status', default='draft', tracking=True)
-
+    state = fields.Selection(selection_add=[
+        ('approval', 'Waiting Approval'),
+        ('approved', 'Approved'),
+        ('done', 'Done')
+    ], ondelete={
+        'approval': 'cascade',
+        'approved': 'cascade', 
+        'done': 'cascade'
+    })
         
         
         

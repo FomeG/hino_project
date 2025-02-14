@@ -22,6 +22,8 @@
         'views/repair_order_smart_buttons_view.xml',
         'views/appointment_smart_buttons_view.xml',
         'views/tab_customer_vehicle_info_view.xml',
+        
+        'views/tab_service_info_worklist_service_views.xml',
 
         
         #region BẢNG GIÁ
