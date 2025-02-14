@@ -10,6 +10,7 @@
                 <!-- Chèn tab mới vào cuối sheet -->
                 <xpath expr="//sheet" position="inside">
                     <notebook>
+
                    <page string="Electronic Invoice" name="order_lines_tab">
                             <group>
                                 <label for="x_electronic_invoice" string="E-Invoice"/>
