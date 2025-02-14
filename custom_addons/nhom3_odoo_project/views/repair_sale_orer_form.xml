@@ -27,7 +27,6 @@
                             <!-- Two column layout -->
                             <group>
                                 <group>
-                                    <field name="x_lsc" string="LSC user"/>
                                     <!-- Left column -->
                                     <field name="partner_id" string="Khách hàng" options="{'no_create': True, 'no_open': True}"/>
                                     <field name="company_id" invisible="1"/>
@@ -52,7 +51,6 @@
                                     <field name="description" string="Diễn giải"/>
                                 </group>
                             </group>
-
                     </sheet>
 
                     <div class="oe_chatter" position="inside">
