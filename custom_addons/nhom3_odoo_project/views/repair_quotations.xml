@@ -4,6 +4,8 @@
     <record id="action_vehicle_information" model="ir.actions.act_window">
         <field name="name">Thông tin xe</field>
         <field name="res_model">vehicle.information</field>
+        <field name="name">Vehicle Information</field>
+        <field name="res_model">vehicle.information</field>  <!-- Model tương ứng -->
         <field name="view_mode">tree,form</field>
     </record>
     
