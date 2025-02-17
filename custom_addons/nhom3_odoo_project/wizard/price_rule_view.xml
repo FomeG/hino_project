@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_price_rule_wizard_form" model="ir.ui.view">
+        <field name="name">price.rule.wizard.form</field>
+        <field name="model">price.rule.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Price Rule">
+                <sheet>
+                    <group string="PRICE COMPUTATION">
+                        <field name="computation" widget="radio" />
+                        <field name="base" />
+                        <field name="x_discount_hmv" />
+                        <field name="x_discount_dealer" />
+                        <field name="x_discount_value" />
+                        <field name="x_extra_fee" />
+                        <field name="price_round" />
+                        <field name="price_min_margin" />
+                        <field name="price_max_margin" />
+                    </group>
+                    <group string="CONDITIONS">
+                        <group>
+                            <field name="applied_on" widget="radio" />
+                            <field name="product_id" invisible="applied_on != '0_product_variant'" />
+                            <field name="product_tmpl_id" invisible="applied_on != '1_product'" />
+                            <field name="categ_id"
+                                invisible="applied_on != '2_product_category'"
+                                required="applied_on == '2_product_category'"
+                                options="{'no_create': True}" />
+                        </group>
+                        <group>
+                            <field name="min_quantity" />
+                            <field name="date_start" />
+                            <field name="date_end" />
+                        </group>
+                        <field name="currency_id" string="Currency" />
+                        <field name="company_id" string="Company" />
+                        <field name="pricelist_id" invisible="1" />
+                    </group>
+                </sheet>
+                <footer>
+                    <button string="Save" name="action_confirm" type="object" class="btn-primary" />
+                    <button string="Cancel" class="btn-secondary" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_price_rule_wizard" model="ir.actions.act_window">
+        <field name="name">Price Rule</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">price.rule.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>
