@@ -48,6 +48,7 @@
         
         
         
+        'wizard/price_rule_view.xml',
         
         
         'views/menus.xml',
