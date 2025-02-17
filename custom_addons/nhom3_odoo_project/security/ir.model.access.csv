@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_vehicle_information,access_vehicle_information,model_vehicle_information,,1,1,1,1
+access_model_warranty_request,access_model_warranty_request,model_warranty_request,,1,1,1,1
+access_model_hmv_check,access_model_hmv_check,model_hmv_check,,1,1,1,1
+access_model_warranty_category,access_model_warranty_category,model_warranty_category,,1,1,1,1
+access_model_dealer_report,access_model_dealer_report,model_dealer_report,,1,1,1,1

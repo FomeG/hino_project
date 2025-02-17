@@ -1,0 +1,3 @@
+from . import repair_job_type,vehicle_information,warranty_request,x_calendar_event, x_repair_order, x_sale_order
+from . import x_lsc_sale_order_smart_button,x_repair_order_smart_buttons
+from . import x_res_partner,x_tab_product_pricelist,x_tab_product_pricelist_item,x_tab_repair_order,x_tab_sale_order,x_tab_sale_order_line,x_tab_stock_move

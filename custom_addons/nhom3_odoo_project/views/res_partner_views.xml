@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+ 
+    <!-- Tạo view tree riêng để hiển thị mã khách hàng trong dropdown -->
+    <record id="view_partner_tree_with_code" model="ir.ui.view">
+        <field name="name">res.partner.tree.with.code</field>
+        <field name="model">res.partner</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="ref"/>
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+</odoo>

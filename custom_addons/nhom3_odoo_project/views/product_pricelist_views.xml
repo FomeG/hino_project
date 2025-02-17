@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- List View cho Bảng giá -->
+    <record id="view_product_pricelist_tree_custom" model="ir.ui.view">
+        <field name="name">product.pricelist.tree.custom</field>
+        <field name="model">product.pricelist</field>
+        <field name="priority">99</field>
+        <field name="arch" type="xml">
+            <tree>
+                <!-- Các trường standard từ product.pricelist -->
+                <field name="name" string="Pricelist Name" />
+                <field name="discount_policy" string="Discount Policy" />
+                <field name="currency_id" string="Currency" widget="many2one"
+                    options="{'no_create': True, 'no_open': True}" domain="[('active','=',True)]" />
+                <field name="company_id" string="Company" />
+            </tree>
+        </field>
+    </record>
+
+    <!-- Thêm vào file product_pricelist_views.xml -->
+    <record id="view_product_pricelist_form_custom" model="ir.ui.view">
+        <field name="name">product.pricelist.form.custom</field>
+        <field name="model">product.pricelist</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name" />
+                        <field name="currency_id" options="{'no_create': True}" />
+                        <field name="discount_policy" />
+                        <field name="company_id" groups="base.group_multi_company" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+   
+    
+</odoo>

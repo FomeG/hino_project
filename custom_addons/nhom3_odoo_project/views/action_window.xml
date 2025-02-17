@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Action: Thông tin xe -->
+    <record id="action_vehicle_information" model="ir.actions.act_window">
+        <field name="name">Thông tin xe</field>
+        <field name="res_model">vehicle.information</field>
+        <field name="name">Vehicle Information</field>
+        <field name="res_model">vehicle.information</field>  <!-- Model tương ứng -->
+        <field name="view_mode">tree,form</field>
+    </record>
+    
+    <!-- Action: Repair Orders -->
+    <record id="action_repair_orders" model="ir.actions.act_window">
+        <field name="name">Repair Orders</field>
+        <field name="res_model">repair.order</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    
+    <!-- Action: Repair Quotes -->
+    <record id="action_repair_quotes" model="ir.actions.act_window">
+        <field name="name">Repair Quotes</field>
+        <field name="res_model">sale.order</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_ids" eval="[
+            (5, 0, 0),
+            (0, 0, {'view_mode': 'tree', 'view_id': ref('view_sale_order_list')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('view_sale_order_form')})
+        ]"/>
+    </record>
+    
+    <!-- Action: Repair Orders (LSC) -->
+    <record id="action_repair_orders_lsc" model="ir.actions.act_window">
+        <field name="name">Repair Orders (LSC)</field>
+        <field name="res_model">sale.order</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_ids" eval="[(5,0,0),
+            (0,0,{'view_mode': 'tree', 'view_id': ref('view_sale_order_list')}),
+            (0,0,{'view_mode': 'form', 'view_id': ref('view_sale_order_form_inherit_lsc')})
+        ]"/>
+    </record>
+    
+    <!-- Action: Payment Request With HMW HMV -->
+    <record id="action_repair_payment_request" model="ir.actions.act_window">
+        <field name="name">Payment Request With HMW HMV</field>
+        <field name="res_model">repair.order</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    
+    <!-- Action: Agent Request Payment (sử dụng custom form view) -->
+    <record id="action_agent_payment_request" model="ir.actions.act_window">
+        <field name="name">Agent request payment</field>
+        <field name="res_model">warranty.request</field>
+        <field name="view_mode">tree,form</field>
+    
+    </record>
+    
+    <!-- Action: Dealer Sales Invoice - Cash back -->
+    <record id="action_agent_sales_invoice_cashback" model="ir.actions.act_window">
+        <field name="name">Dealer Sales Invoice - Cash back</field>
+        <field name="res_model">repair.order</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    
+    <!-- Action: Purchase Invoice (HMV - Cash back) -->
+    <record id="action_hmv_purchase_invoice_cashback" model="ir.actions.act_window">
+        <field name="name">Purchase Invoice (HMV - Cash back)</field>
+        <field name="res_model">repair.order</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <!-- Action cho menu Bảng giá -->
+    <record id="action_product_pricelist_custom" model="ir.actions.act_window">
+        <field name="name">Price List</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">product.pricelist</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_product_pricelist_tree_custom" />
+    </record>
+</odoo>

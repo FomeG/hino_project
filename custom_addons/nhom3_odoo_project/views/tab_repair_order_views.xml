@@ -1,0 +1,190 @@
+<odoo>
+    <record id="view_repair_order_form_inherit_service_info" model="ir.ui.view">
+        <field name="name">repair.order.form.inherit.service.info</field>
+        <field name="model">repair.order</field>
+        <field name="inherit_id" ref="repair.view_repair_order_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='parts']" position="replace">
+                <page string="Service Information" name="service_info">
+                    <notebook>
+                        <!-- Sparepart List -->
+                        <page string="Sparepart List" name="sparepart_list">
+                            <field name="move_ids"
+                                context="{'default_repair_line_type': 'add'}"
+                                domain="[('repair_line_type', '=', 'add')]">
+                                <tree editable="bottom">
+                                    <field name="product_uom_category_id" invisible="1" force_save="1"/>
+                                    <field name="default_code" domain="[('detailed_type', '=', 'product')]" force_save="1"/>
+                                    <field name="x_product_name" force_save="1"/>
+                                    <field name="product_uom"
+                                        required="context.get('default_code', False)" force_save="1"
+                                        domain="[('category_id', '=', product_uom_category_id)]"/>
+                                    <field name="product_uom_qty" force_save="1"
+                                        required="context.get('default_code', False)" />
+                                    <field name="x_pricelist" force_save="1"/>
+                                    <field name="x_unit_price" force_save="1"/>
+                                    <field name="x_hmv_percent" force_save="1"/>
+                                    <field name="x_dealer_percent" force_save="1"/>
+                                    <field name="x_discount" force_save="1"/>
+                                    <field name="x_tax_excluded" force_save="1"/>
+                                    <field name="x_taxes" force_save="1"/>
+                                    <field name="x_tax_amount" force_save="1"/>
+                                    <field name="currency_id" column_invisible="1" />
+                                </tree>
+                            </field>
+                        </page>
+
+                        <!-- Service List -->
+                        <page string="Work List" name="service_list">
+                            <field name="move_ids"
+                                context="{'default_repair_line_type': 'add'}"
+                                domain="[('repair_line_type', '=', 'add')]">
+                                <tree editable="bottom">
+                                    <field name="x_default_code" force_save="1"/>
+                                    <field name="x_service_description" force_save="1"/>
+                                    <field name="x_task_details" force_save="1"/>
+                                    <field name="x_performer" force_save="1"/>
+                                    <field name="x_work_hours" force_save="1"/>
+                                    <field name="x_outsource" force_save="1"/>
+                                    <field name="x_pricelist" force_save="1"/>
+                                    <field name="x_quantity" force_save="1"/>
+                                    <field name="x_unit_price" force_save="1"/>
+                                    <field name="x_hmv_percent" force_save="1"/>
+                                    <field name="x_dealer_percent" force_save="1"/>
+                                    <field name="x_task_count" force_save="1"/>
+                                    <field name="x_discount" force_save="1"/>
+                                    <field name="x_tax_excluded" force_save="1"/>
+                                    <field name="x_taxes" force_save="1"/>
+                                    <field name="x_tax_amount" force_save="1"/>
+                                    <field name="currency_id" column_invisible="1" force_save="1"/>
+                                </tree>
+                            </field>
+                        </page>
+
+                        <!-- Document List -->
+                        <page string="Document" name="document_list">
+                            <field name="move_ids" context="{'default_repair_line_type': 'add'}"
+                                domain="[('repair_line_type', '=', 'add')]">
+                                <tree editable="bottom">
+                                    <field name="x_repair_order" force_save="1"/>
+                                    <field name="x_task_name" force_save="1"/>
+                                    <field name="x_main_responsible" force_save="1"/>
+                                    <field name="x_work_area" force_save="1"/>
+                                    <field name="x_standard_hours" force_save="1"/>
+                                    <field name="x_start_time" force_save="1"/>
+                                    <field name="x_end_time" force_save="1"/>
+                                    <field name="x_actual_hours" force_save="1"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+
+
+        <record id="view_repair_order_form_inherit_promotion" model="ir.ui.view">
+        <field name="name">repair.order.form.inherit.promotion</field>
+        <field name="model">repair.order</field>
+        <field name="inherit_id" ref="repair.view_repair_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='repair_notes']" position="replace">
+                <page string="Promotions" name="promotions">
+                    <group>
+                        <group>
+                            <field name="partner_id" readonly="1"/>
+                            <field name="x_vehicle_plate" readonly="1"/>
+                            <field name="x_km_at_repair"
+                                   readonly="state != 'draft'"
+                                   required="1"/>
+                        </group>
+                        <group>
+                            <field name="x_pricelist_id" readonly="1"
+                                   domain="['|',
+                                          '&amp;',
+                                          ('x_apply_for', '=', 'specific'),
+                                          ('x_customer_ids', 'in', partner_id),
+                                          '|',
+                                          '&amp;',
+                                          ('x_apply_for_vehicles', '=', 'specific'),
+                                          ('x_vehicle_ids', 'in', x_vehicle_plate),
+                                          '&amp;',
+                                          ('x_from_km', '&lt;=', x_km_at_repair),
+                                          '|',
+                                          ('x_to_km', '=', 0),
+                                          ('x_to_km', '&gt;=', x_km_at_repair)]"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+
+    <record id="view_customer_vehicle_form_inherit" model="ir.ui.view">
+        <field name="name">vehicle.information.inherit.customer.vehicle</field>
+        <field name="model">repair.order</field>
+        <field name="inherit_id" ref="repair.view_repair_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='page_miscellaneous']" position="replace">
+                <page string="Customer/Vehicle" name="customer_vehicle">
+                    <group>
+                        <group string="Vehicle info">
+                            <field name="x_engine_number"/>
+                            <field name="x_main_route"/>
+                            <field name="x_body_type_id"/>
+                            <field name="x_body_marker"/>
+                            <field name="x_trans_number"/>
+                            <field name="x_customer_delivery_date"/>
+                        </group>
+                        <group string="Customer info">
+                            <field name="x_customer_email"/>
+                            <field name="x_customer_revenue"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+
+    <record id="view_repair_order_form_inherit_history" model="ir.ui.view">
+    <field name="name">repair.order.form.inherit.history</field>
+    <field name="model">repair.order</field>
+    <field name="inherit_id" ref="repair.view_repair_order_form" />
+    <field name="arch" type="xml">
+      <xpath expr="//notebook" position="inside">
+        <page string="Repair History" name="lssc">
+          <group>
+            <field name="repair_order_id" />
+            <field name="job_type" />
+          </group>
+        </page>
+      </xpath>
+    </field>
+  </record>
+
+    <record id="view_repair_order_form_inherit_signature" model="ir.ui.view">
+        <field name="name">repair.order.form.inherit.signature</field>
+        <field name="model">repair.order</field>
+        <field name="inherit_id" ref="repair.view_repair_order_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="Customer Signature" name="customer_signature"
+                    invisible="not require_signature and not signed_by and not signature and not signed_on">
+                    <group>
+                        <field name="signed_by" readonly="signature" />
+                        <field name="signed_on" readonly="signature" />
+                        <field name="signature" widget="signature" />
+                        <field name="require_signature" invisible="1" />
+                    </group>
+                </page>
+                <h2>Chưa có gì, đang xem lại phần này, làm sau 🤣🤣🤣</h2>
+
+            </xpath>
+
+        </field>
+    </record>
+</odoo>
