@@ -3,10 +3,10 @@
         <field name="name">repair.order.tree.inherit</field>
         <field name="model">repair.order</field>
         <field name="arch" type="xml">
-            <tree decoration-info="x_status=='confirmed'"
-                  decoration-success="x_status=='completed'"
-                  decoration-warning="x_status=='repairing'"
-                  decoration-danger="x_status=='cancel'">
+            <tree decoration-info="x_status == 'confirmed'"
+                  decoration-warning="x_status == 'repairing'"
+                  decoration-success="x_status == 'completed'"
+                  decoration-danger="x_status == 'cancel'">
                 <field name="name"/>
                 <field name="x_quotation_id"/>
                 <field name="x_vehicle_plate"/>
@@ -17,12 +17,15 @@
                 <field name="x_repair_type"/>
                 <field name="x_service_advisor_id"/>
                 <field name="x_schedule_id"/>
-                <field name="x_appointment_status" widget="badge"/>
+                <field name="x_appointment_status" widget="badge"
+                       decoration-info="x_appointment_status == 'open'"
+                       decoration-success="x_appointment_status == 'done'"
+                       decoration-danger="x_appointment_status == 'canceled'"/>
                 <field name="x_status" widget="badge"
-                       decoration-info="x_status=='confirmed'"
-                       decoration-success="x_status=='completed'"
-                       decoration-warning="x_status=='repairing'"
-                       decoration-danger="x_status=='cancel'"/>
+                       decoration-info="x_status == 'confirmed'"
+                       decoration-warning="x_status == 'repairing'"
+                       decoration-success="x_status == 'completed'"
+                       decoration-danger="x_status == 'cancel'"/>
 
             </tree>
         </field>

@@ -12,6 +12,20 @@
                     <field name="x_repair_order_count" widget="statinfo" string="Repair Orders"/>
                 </button>
             </xpath>
+
+            <xpath expr="//div" position="before">
+                <button name="button_appointment_confirm" invisible="appointment_status != 'draft'" type="object"
+                        string="Confirm" class="me-2 oe_highlight"/>
+                <button name="button_appointment_done" invisible="appointment_status != 'open'" type="object"
+                        string="Finish" class="me-2 oe_highlight"/>
+                <button name="button_appointment_cancel" invisible="appointment_status not in ('draft', 'open')" type="object"
+                        string="Cancel" class="me-2 oe_highlight"/>
+                <button name="button_appointment_draft" type="object" string="Set to Draft"
+                        invisible="appointment_status not in ('canceled', 'done')"/>
+
+                <field name="appointment_status" widget="statusbar"/>
+
+            </xpath>
         </field>
     </record>
 </odoo>

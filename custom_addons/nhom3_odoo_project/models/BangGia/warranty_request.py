@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from odoo import models, fields, api
 
+
 class WarrantyRequest(models.Model):
     _name = 'warranty.request'
     _description = 'Warranty Request'
@@ -20,23 +21,23 @@ class WarrantyRequest(models.Model):
 
     # Các trường lấy từ Repair Order
     x_plate_number = fields.Char(
-        related='x_repair_order.x_vehicle_plate.name', 
-        string="Plate Number", 
+        related='x_repair_order.x_vehicle_plate.name',
+        string="Plate Number",
         readonly=True
     )
     vin = fields.Char(related='x_repair_order.x_vin_number', string="VIN", readonly=True)
     x_engine = fields.Char(related='x_repair_order.x_engine_number', string="Engine", readonly=True)
     x_warranty_expiry_date = fields.Datetime(
-        related='x_repair_order.x_warranty_expiry', 
-        string="Warranty Expiry Date", 
+        related='x_repair_order.x_warranty_expiry',
+        string="Warranty Expiry Date",
         readonly=True
     )
 
-    x_owner_name=fields.Char(related='x_repair_order.partner_id.name',string="Owner vehicle name", readonly=True)
-    x_address=fields.Char(related='x_repair_order.partner_id.street',string="Address", readonly=True)
-    x_tel=fields.Char(related='x_repair_order.x_driver_phone',string="Phone", readonly=True)
-    x_driver=fields.Char(related='x_repair_order.x_driver',string="Driver", readonly=True)
-    x_driver_phone=fields.Char(related='x_repair_order.x_driver_phone',string="Phone", readonly=True)
+    x_owner_name = fields.Char(related='x_repair_order.partner_id.name', string="Owner vehicle name", readonly=True)
+    x_address = fields.Char(related='x_repair_order.partner_id.street', string="Address", readonly=True)
+    x_tel = fields.Char(related='x_repair_order.x_driver_phone', string="Phone", readonly=True)
+    x_driver = fields.Char(related='x_repair_order.x_driver', string="Driver", readonly=True)
+    x_driver_phone = fields.Char(related='x_repair_order.x_driver_phone', string="Phone", readonly=True)
     # x_total_requested_amount
     # x_total_approved_amount
     x_dealer_report_date = fields.Datetime(
@@ -82,7 +83,7 @@ class WarrantyRequest(models.Model):
         ('cancelled', 'Cancelled'),
     ], default='draft', string="Status")
 
-        # Các field khác ...
+    # Các field khác ...
 
     def action_send_approval(self):
         self.ensure_one()
@@ -115,7 +116,7 @@ class WarrantyRequest(models.Model):
 
     # 1. Số chứng từ
     x_number = fields.Char(string="Number", required=True)
-    
+
     # 2. Phiếu sửa chữa BH (liên kết đến repair.order)
     x_repair_number = fields.Many2one(
         'repair.order',
@@ -123,7 +124,6 @@ class WarrantyRequest(models.Model):
         required=True,
     )
 
-    
     # 3. Ngày từ ngày hoàn thành sửa chữa - tính theo công thức:
     #    Ngày hoàn thành của lệnh sửa chữa - Ngày đại lý tạo yêu cầu thanh toán
     # x_days_from_repair_completion = fields.Float(
@@ -133,81 +133,90 @@ class WarrantyRequest(models.Model):
     #     required=True,
     #     help="Tính theo công thức = Ngày hoàn thành của lệnh sửa chữa – Ngày đại lý tạo yêu cầu thanh toán"
     # )
-    
+
     # 4. Ngày tạo yêu cầu bảo hành
     x_warranty_request_date = fields.Datetime(string="Warranty Request Date", required=True)
-    
+
     # 5. Ngày gửi yêu cầu bảo hành
     x_warranty_submission_date = fields.Datetime(string="Warranty Submission Date")
-    
+
     # 6. Ngày xảy ra sự cố
     x_damaged_date = fields.Datetime(string="Damaged Date")
-    
-       # Các trường Many2one khác, ví dụ:
+
+    # Các trường Many2one khác, ví dụ:
     x_hmv_check = fields.Many2one(
-        'hmv.check', 
+        'hmv.check',
         string="HMV Check"
     )
     x_warranty_category = fields.Many2one(
-        'warranty.category', 
+        'warranty.category',
         string="Warranty Category"
     )
     x_dealer_report = fields.Many2one(
-        'dealer.report', 
+        'dealer.report',
         string="Dealer Report"
     )
     x_dealer_phone = fields.Many2one(
-        'res.partner', 
-        string="Dealer Phone", 
+        'res.partner',
+        string="Dealer Phone",
         ondelete='set null'
     )
     # 11. Điều kiện vận hành
     x_operation_conditions = fields.Char(string="Operation Conditions")
-    
+
     # 12. Số lần hỏng tương tự lặp lại
     x_same_damaged_repeat = fields.Float(string="Same Damaged Repeat")
-    
+
     # 13. Số km lúc hỏng
     x_km_damaged = fields.Float(string="Km Damaged")
-    
+
     # 14. Số km thực tế (Ordometer reading)
     x_ordometer_reading = fields.Float(string="Ordometer Reading")
-    
+
     # 15. Hiện tượng
     x_phenomenon = fields.Char(string="Phenomenon")
-    
+
     # 16. Nguyên nhân hỏng
     x_causes_of_damaged = fields.Char(string="Causes of Damaged")
-    
+
     # 17. Cải tạo/PT không chính hiệu
     x_not_genuine_spare_parts = fields.Char(string="Not Genuine Spare Parts")
-    
+
     # 18. Ý kiến đại lý
     x_dealer_comment = fields.Char(string="Dealer Comment")
-    
+
     # 19. Ý kiến của nhà máy
     x_factory_comment = fields.Char(string="Factory Comment")
-    
+
     # 20. Biện pháp khắc phục
     x_remedies = fields.Char(string="Remedies")
-    
+
     # 21. Công việc
     x_works = fields.Char(string="Works")
-    
+
     # 22. Bộ phận hỏng
     x_damaged_part = fields.Char(string="Damaged Part")
-    
+
     # 23. Bộ phận bị ảnh hưởng
     x_impact_part = fields.Char(string="Impact Part")
-    
+
     # 24. Ý kiến khách hàng
     x_customer_comment = fields.Char(string="Customer Comment")
-    
+
     # 25. Trả phụ tùng về nhà máy
     x_return_part_to_factory = fields.Char(string="Return Part to Factory")
-    
+
     # 26. Lý do
     x_reason = fields.Char(string="Reason")
+
+    x_dealer_attachment_file = fields.Binary(string="Dealer Attachment")
+    x_dealer_attachment_filename = fields.Char(string="Dealer File Name")
+
+    x_factory_attachment_file = fields.Binary(string="Factory Attachment")
+    x_factory_attachment_filename = fields.Char(string="Factory File Name")
+
+    x_tech_report_attachment_file = fields.Binary(string="Technical Report Attachment")
+    x_tech_report_attachment_filename = fields.Char(string="Technical Report File Name")
 
     @api.depends('x_repair_number.date_done', 'x_warranty_request_date')
     def _compute_days_from_repair_completion(self):
@@ -218,17 +227,22 @@ class WarrantyRequest(models.Model):
             else:
                 rec.x_days_from_repair_completion = 0.0
 
+
 class RepairOrder(models.Model):
     _name = 'repair.order'
     _inherit = 'repair.order'
-    
+
     completion_date = fields.Datetime(string="Completion Date")
     date_done = fields.Datetime(string="Completion Date")
+
+
 class DealerReport(models.Model):
     _name = 'dealer.report'
     _description = 'Dealer Report'
 
     name = fields.Char(string="Report Name", required=True)
+
+
 class HMVCheck(models.Model):
     _name = 'hmv.check'  # Tên model
     _description = 'HMV Check'
@@ -240,6 +254,7 @@ class HMVCheck(models.Model):
         ('done', 'Done'),
         ('cancelled', 'Cancelled')
     ], string="Status", default='pending')
+
 
 class WarrantyCategory(models.Model):
     _name = 'warranty.category'
