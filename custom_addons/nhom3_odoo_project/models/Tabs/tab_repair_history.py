@@ -7,8 +7,8 @@ class RepairHistory(models.Model):
     _inherit = 'repair.order'
 
     # Fields for repair history
-    repair_order_id = fields.Many2one('repair.order', string='Số lệnh sửa chữa')
-    job_type = fields.Many2one('repair.job.type', string='Loại công việc')
+    repair_order_id = fields.Many2one('repair.order', string='Repair Order Number')
+    job_type = fields.Many2one('repair.job.type', string='Job Type')
 
 class RepairJobType(models.Model):
     _name = 'repair.job.type'

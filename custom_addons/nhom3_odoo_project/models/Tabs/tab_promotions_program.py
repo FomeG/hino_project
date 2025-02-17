@@ -1,16 +1,17 @@
 from odoo import api, fields, models, _
 from odoo.exceptions import ValidationError
 
-class RepairOrder(models.Model):
+class PromotionProgram(models.Model):
     _inherit = 'repair.order'
 
-    x_vehicle_plate = fields.Many2one('vehicle.information', string='Vehicle Information', required=True)
-    x_km_at_repair = fields.Float(string='KM at Repair', required=True)
+    x_vehicle_plate = fields.Many2one('vehicle.information', string='License Plate', required=True)
+    x_km_at_repair = fields.Float(string='KM at Repair', required=True, help='Current mileage of the vehicle at the time of repair')
     x_pricelist_id = fields.Many2one(
         'product.pricelist',
         string='Price List',
         compute='_compute_applicable_pricelist',
-        store=True
+        store=True,
+        help='Price list applicable for the repair order'
     )
 
     @api.depends('partner_id', 'x_vehicle_plate', 'x_km_at_repair')
@@ -48,12 +49,6 @@ class RepairOrder(models.Model):
             )
 
             record.x_pricelist_id = pricelist.id if pricelist else False
-
-    @api.onchange('x_vehicle_plate')
-    def _onchange_vehicle_plate(self):
-        """Update partner when vehicle information changes"""
-        if self.x_vehicle_plate:
-            self.partner_id = self.x_vehicle_plate.owner_info
 
     @api.constrains('x_km_at_repair')
     def _check_km_at_repair(self):
