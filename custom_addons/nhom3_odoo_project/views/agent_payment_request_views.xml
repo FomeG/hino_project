@@ -8,34 +8,45 @@
                 <form string="Warranty Request">
                     <header>
                         <button name="action_send_approval" type="object" string="Gửi duyệt" class="btn-primary"/>
-                        <button name="action_cancel" type="object" class="oe_stat_button border-2 border-warning bg-light text-warning" icon="fa-user-circle">
+                        <button name="action_cancel" type="object"
+                                class="oe_stat_button border-2 border-warning bg-light text-warning"
+                                icon="fa-user-circle">
                             <span>Cancel</span>
                         </button>
-                        <button name="action_print" type="object" class="oe_stat_button border-2 border-info bg-light text-info" icon="fa-external-link">
+                        <button name="action_print" type="object"
+                                class="oe_stat_button border-2 border-info bg-light text-info" icon="fa-external-link">
                             <span>Print</span>
                         </button>
-                        <button name="action_approve" type="object" class="oe_stat_button border-2 border-success bg-light text-success" icon="fa-file-text-o">
+                        <button name="action_approve" type="object"
+                                class="oe_stat_button border-2 border-success bg-light text-success"
+                                icon="fa-file-text-o">
                             <span>Approve</span>
                         </button>
-                        <button name="action_reject" type="object" class="oe_stat_button border-2 border-danger bg-light text-danger" icon="fa-comments">
+                        <button name="action_reject" type="object"
+                                class="oe_stat_button border-2 border-danger bg-light text-danger" icon="fa-comments">
                             <span>Reject</span>
                         </button>
-                        <field name="x_status" widget="statusbar" statusbar_visible="draft,rejected,in_progress,approved,cancelled"/>
+                        <field name="x_status" widget="statusbar"
+                               statusbar_visible="draft,rejected,in_progress,approved,cancelled"/>
                     </header>
                     <sheet>
                         <div style="background-color: #d3d3d3; border: 1px solid #ccc; text-align: center; padding: 10px;">
-                            <h1>Warranty Request Number: <field name="x_warranty_request_number" nolabel="1" readonly="1"/></h1>
+                            <h1>Warranty Request Number:
+                                <field name="x_warranty_request_number" nolabel="1" readonly="1"/>
+                            </h1>
                         </div>
                         <group col="4" string="Repair Ticket">
                             <group>
-                                    <group>
-                                    <field name="x_repair_number" string="Warranty Repair Voucher:" class="underline-input"/>
-                                    <label for="x_repair_number" string="Ngày hoàn thành sửa chữa bảo hành" class="o_form_label text-danger"/>
+                                <group>
+                                    <field name="x_repair_number" string="Warranty Repair Voucher:"
+                                           class="underline-input"/>
+                                    <label for="x_repair_number" string="Ngày hoàn thành sửa chữa bảo hành"
+                                           class="o_form_label text-danger"/>
                                 </group>
 
 
                                 <field name="x_number" string="Number" class="underline-input"/>
-                            
+
                             </group>
                             <group>
                                 <field name="x_warranty_request_date" string="Warranty Request Date"/>
@@ -47,16 +58,15 @@
                                 <field name="x_warranty_category" string="Warranty Category"/>
 
 
-                               
                             </group>
                             <group>
                                 <field name="x_dealer_phone" string="Dealer Phone"/>
                                 <field name="x_dealer_report" string="Dealer report"/>
 
-                            
+
                             </group>
                         </group>
-                   
+
                         <group>
                             <group col="2" string="Vehicle Information">
                                 <group>
@@ -90,7 +100,7 @@
                                     <field name="x_not_genuine_spare_parts" string="not genuine spare parts"/>
                                     <field name="x_dealer_comment" string="Dealer comment"/>
                                     <field name="x_factory_comment" string="Factory comment"/>
-                            
+
 
                                 </group>
                             </group>
@@ -112,9 +122,28 @@
                                     <field name="x_factory_opinion" string="Factory Opinion" colspan="2"/>
                                 </group>
                             </page>
+
                             <page string="Validity">
                                 <group>
                                     <field name="x_remaining_validity_days" string="Remaining Validity Days"/>
+                                </group>
+                            </page>
+
+                            <page string="Dealer Attachment" name="dealer_attachment">
+                                <group>
+                                    <field name="x_dealer_attachment_file" filename="x_dealer_attachment_filename"/>
+                                </group>
+                            </page>
+
+                            <page string="Factory Attachment" name="factory_attachment">
+                                <group>
+                                    <field name="x_factory_attachment_file" filename="x_factory_attachment_filename"/>
+                                </group>
+                            </page>
+
+                            <page string="Technical Report" name="tech_report_attachment">
+                                <group>
+                                    <field name="x_tech_report_attachment_file" filename="x_tech_report_attachment_filename"/>
                                 </group>
                             </page>
                         </notebook>
@@ -137,16 +166,16 @@
             <field name="model">warranty.request</field>
             <field name="arch" type="xml">
                 <tree string="Warranty Requests">
-                <field name="x_warranty_request_number" string="Warranty Request Number"/>
-                <field name="x_repair_order" string="Repair Order"/>
-                <field name="vin" string="VIN"/>
-                <field name="x_dealer_report_date" string="Dealer Report Date"/>
-                <field name="x_owner_name" string="Owner Name"/>
-                <field name="x_submission_count" string="Submission Count"/>
-                <field name="x_status" string="Status"
-                 decoration-warning="x_status == 'approved'" 
-                   decoration-info="x_status == 'in_progress'"
-                />
+                    <field name="x_warranty_request_number" string="Warranty Request Number"/>
+                    <field name="x_repair_order" string="Repair Order"/>
+                    <field name="vin" string="VIN"/>
+                    <field name="x_dealer_report_date" string="Dealer Report Date"/>
+                    <field name="x_owner_name" string="Owner Name"/>
+                    <field name="x_submission_count" string="Submission Count"/>
+                    <field name="x_status" string="Status"
+                           decoration-warning="x_status == 'approved'"
+                           decoration-info="x_status == 'in_progress'"
+                    />
                 </tree>
             </field>
         </record>
