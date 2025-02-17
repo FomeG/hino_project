@@ -21,37 +21,42 @@
 
                     </header>
                     <sheet>
-                            <h1>
-                                <field name="name" readonly="1" placeholder="SO/2024/0001"/>
-                            </h1>
-                            <!-- Two column layout -->
+                        <h1>
+                            <field name="name" readonly="1" placeholder="SO/2024/0001"/>
+                        </h1>
+                        <!-- Two column layout -->
+                        <group>
                             <group>
-                                <group>
-                                    <field name="x_lsc" string="LSC user"/>
-                                    <!-- Left column -->
-                                    <field name="partner_id" string="Khách hàng" options="{'no_create': True, 'no_open': True}"/>
-                                    <field name="company_id" invisible="1"/>
-                                    <field name="x_type_of_document" string="Loại chứng từ"/>
-                                    <field name="partner_shipping_id" string="Địa chỉ giao hàng" context="{'show_address': 1}" options="{'always_reload': True, 'no_create': True}"/>
-                                    <field name="partner_invoice_id" string="Địa chỉ xuất hóa đơn" context="{'show_address': 1}" options="{'always_reload': True, 'no_create': True}"/>
-                                    <field name="x_deposit" string="Khách hàng đặt cọc"/>
-                                    <field name="x_category" string="Loại hàng"/>
-                                    <field name="x_type_of_repair_order" string="Loại sửa chữa"/>
-                                    <field name="pricelist_id" string="Bảng giá"/>
-                                    <field name="currency_id" string="Tiền tệ"/>
-                                    <field name="currency_rate" string="Tỷ giá"/>
-                                </group>
-                                <group>
-                                    <!-- Right column -->
-                                    <field name="date_order" string="Ngày chứng từ"/>
-                                    <field name="x_posting_date" string="Ngày hạch toán"/>
-                                    <field name="validity_date" string="Ngày đến hạn"/>
-                                    <field name="payment_term_id" string="Điều khoản thanh toán"/>
-                                    <field name="origin" string="Chứng từ gốc"/>
-                                    <field name="x_delivery_warehouse" string="Kho xuất"/>
-                                    <field name="description" string="Diễn giải"/>
-                                </group>
+                                <field name="x_lsc" string="LSC user"/>
+                                <!-- Left column -->
+                                <field name="partner_id" string="Khách hàng"
+                                       options="{'no_create': True, 'no_open': True}"/>
+                                <field name="company_id" invisible="1"/>
+                                <field name="x_type_of_document" string="Loại chứng từ"/>
+                                <field name="partner_shipping_id" string="Địa chỉ giao hàng"
+                                       context="{'show_address': 1}"
+                                       options="{'always_reload': True, 'no_create': True}"/>
+                                <field name="partner_invoice_id" string="Địa chỉ xuất hóa đơn"
+                                       context="{'show_address': 1}"
+                                       options="{'always_reload': True, 'no_create': True}"/>
+                                <field name="x_deposit" string="Khách hàng đặt cọc"/>
+                                <field name="x_category" string="Loại hàng"/>
+                                <field name="x_type_of_repair_order" string="Loại sửa chữa"/>
+                                <field name="pricelist_id" string="Bảng giá"/>
+                                <field name="currency_id" string="Tiền tệ"/>
+                                <field name="currency_rate" string="Tỷ giá"/>
                             </group>
+                            <group>
+                                <!-- Right column -->
+                                <field name="date_order" string="Ngày chứng từ"/>
+                                <field name="x_posting_date" string="Ngày hạch toán"/>
+                                <field name="validity_date" string="Ngày đến hạn"/>
+                                <field name="payment_term_id" string="Điều khoản thanh toán"/>
+                                <field name="origin" string="Chứng từ gốc"/>
+                                <field name="x_delivery_warehouse" string="Kho xuất"/>
+                                <field name="description" string="Diễn giải"/>
+                            </group>
+                        </group>
 
                     </sheet>
 
@@ -80,7 +85,12 @@
                     <field name="pricelist_id" string="Bảng giá"/>
                     <field name="currency_id" string="Tiền tệ"/>
                     <field name="amount_total" string="Tổng tiền"/>
-                    <field name="state" string="Trạng thái"/>
+                    <field name="state" string="Trạng thái"
+                           widget="badge"
+                           decoration-info="state == 'draft'"
+                           decoration-primary="state == 'sent'"
+                           decoration-success="state == 'sale'"
+                           decoration-danger="state == 'cancel'"/>
                 </tree>
             </field>
         </record>
