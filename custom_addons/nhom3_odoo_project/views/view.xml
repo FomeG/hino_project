@@ -117,7 +117,9 @@
                         <field name="x_reception_time" />
                         <field name="x_expected_completion_time" />
                         <field name="x_completion_time" />
-                        <field name="x_km_at_repair" />
+                        <field name="x_km_at_repair"
+                                   readonly="state != 'draft' or not partner_id or not x_vehicle_plate"
+                                   required="1"/>
                         <field name="x_execution_location" />
 
                     </group>

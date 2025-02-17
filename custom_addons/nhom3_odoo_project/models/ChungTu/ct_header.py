@@ -53,7 +53,7 @@ class CtHeader(models.Model):
     x_completion_time = fields.Datetime('Completion Time', readonly=True)
 
     # KM at repair
-    x_km_at_repair = fields.Float('KM at Repair')
+    x_km_at_repair = fields.Float(string='KM at Repair', required=True, help='Current mileage of the vehicle at the time of repair')
 
     # Execution Location
     x_execution_location = fields.Selection([
