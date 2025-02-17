@@ -26,15 +26,15 @@
                 <sheet>
                     <group>
                         <field name="name" />
-                        <field name="currency_id" options="{'no_create': True}" />
                         <field name="discount_policy" />
                         <field name="company_id" groups="base.group_multi_company" />
                     </group>
                 </sheet>
             </form>
+
+
         </field>
     </record>
-
 
     <!-- Kế thừa và chỉnh sửa form view gốc -->
     <record id="view_product_pricelist_form_inherit" model="ir.ui.view">
@@ -42,6 +42,25 @@
         <field name="model">product.pricelist</field>
         <field name="inherit_id" ref="product.product_pricelist_view" />
         <field name="arch" type="xml">
+
+
+            <!-- Thêm trường tiền tệ -->
+            <xpath expr="//group[@name='pricelist_settings']/field[@name='company_id']"
+                position="before">
+                <field name="currency_id" options="{'no_create': True}" />
+            </xpath>
+
+            <!-- Thêm nút import -->
+            <xpath expr="//group[@name='pricelist_settings']/field[@name='company_id']"
+                position="after">
+                <button name="action_data_import" type="object"
+                    class="me-2 oe_stat_button border-2 border-primary bg-light text-primary"
+                    icon="fa-user-circle">
+                    <span>Import Data</span>
+                </button>
+            </xpath>
+
+
             <!-- Thêm các trường mới vào tree view của item_ids -->
             <xpath expr="//field[@name='item_ids']/tree[1]" position="attributes">
                 <attribute name="editable">bottom</attribute>
@@ -50,19 +69,25 @@
             <!-- Chỉnh sửa các trường trong tree view của item_ids -->
             <xpath expr="//field[@name='item_ids']/tree[1]/field[@name='fixed_price']"
                 position="before">
-                <field name="x_discount_hmv" />
+                <!-- <field name="x_discount_hmv" /> -->
                 <field name="x_discount_dealer" />
                 <field name="price_discount" readonly="1" />
                 <field name="x_discount_value" />
                 <field name="x_auto" />
+            </xpath>
+
+            <!-- Chỉnh sửa các trường trong tree view của item_ids -->
+            <xpath expr="//field[@name='item_ids']/tree[1]/field[@name='product_id']"
+                position="replace">
+                <field name="x_discount_hmv" />
+            </xpath>
+
+            <!-- Chỉnh sửa các trường trong tree view của item_ids -->
+            <xpath expr="//field[@name='item_ids']/tree[1]/field[@name='fixed_price']"
+                position="replace">
                 <field name="x_allow_update_delete" />
             </xpath>
 
-            <!-- Ẩn một số trường không cần thiết -->
-            <xpath expr="//field[@name='item_ids']/tree[1]/field[@name='fixed_price']"
-                position="attributes">
-                <attribute name="invisible">1</attribute>
-            </xpath>
 
             <!-- Thêm các tab mới sau tab Configuration -->
             <xpath expr="//page[@name='pricelist_config']" position="after">

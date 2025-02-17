@@ -25,10 +25,12 @@ _build/
 # !/addons/stock/
 # !/addons/product/
 # !/addons/sale/
+# !/addons/account/
 
 
 # /enterprise-17.0/*
 # !/enterprise-17.0/
+
 # !/enterprise-17.0/appointment/
 
 

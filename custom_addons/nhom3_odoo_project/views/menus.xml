@@ -45,28 +45,27 @@
         sequence="40" />
 
     <!-- Các menu con cho Payment Request With HMW HMV -->
-<menuitem id="menu_agent_payment_request"
-          name="Agent request payment"
-          parent="menu_repair_payment_request"
-          action="action_agent_payment_request"
-          sequence="10"
-          groups="base.group_user"/>
+                <menuitem id="menu_agent_payment_request"
+                    name="Agent request payment"
+                    parent="menu_repair_payment_request"
+                    action="action_agent_payment_request"
+                    sequence="10"
+                    groups="base.group_user" />
+
+                <menuitem id="menu_agent_sales_invoice_cashback"
+                    name="Dealer Sales Invoice - Cash back"
+                    parent="menu_repair_payment_request"
+                    action="action_agent_sales_invoice_cashback"
+                    sequence="20" />
+
+                <menuitem id="menu_hmv_purchase_invoice_cashback"
+                    name="Purchase Invoice (HMV - Cash back)"
+                    parent="menu_repair_payment_request"
+                    action="hmv_cashback_nghia"
+                    sequence="30" />
 
 
-    <menuitem id="menu_agent_sales_invoice_cashback"
-        name="Dealer Sales Invoice - Cash back"
-        parent="menu_repair_payment_request"
-        action="action_agent_sales_invoice_cashback" 
-        sequence="20" />
-
-    <menuitem id="menu_hmv_purchase_invoice_cashback"
-        name="Purchase Invoice (HMV - Cash back)"
-        parent="menu_repair_payment_request"
-        action="action_hmv_purchase_invoice_cashback" 
-        sequence="30" />
-        
-
-    <!-- Menu Price List -->
+    <!-- Menu Lệnh sửa chữa -->
     <menuitem id="menu_product_pricelist"
         name="Price List"
         parent="menu_after_services"

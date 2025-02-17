@@ -22,7 +22,11 @@
         'views/repair_order_smart_buttons_view.xml',
         'views/appointment_smart_buttons_view.xml',
         'views/tab_customer_vehicle_info_view.xml',
+        
+        'views/tab_service_info_worklist_service_views.xml',
 
+        
+        
         
         #region BẢNG GIÁ
         'views/product_pricelist_views.xml',
@@ -34,7 +38,23 @@
         'views/tad_order_detail.xml',
         'views/tab_customer_signature.xml',
         'views/tab_other_info.xml',
+        
+        
+        
+        
+        
+        'views/hoadonmua_view.xml',
+        
+        
+        
+        
+        'wizard/price_rule_view.xml',
+        
+        
         'views/menus.xml',
+        
+        
+        # 'data/vendor_bill_sequence.xml',
         'views/agent_payment_request_views.xml',
 
     ],
