@@ -113,7 +113,19 @@
                         string="Cancel" class="oe_highlight mb-3" />
                 </xpath>
 
+            <notebook>
+                <page string="Approval Information" name="approval_attachment">
+                    <group>
+                        <field name="x_approval_attachment_file" filename="x_approval_attachment_filename"/>
+                    </group>
+                </page>
 
+                <page string="Attachments" name="attachments">
+                    <group>
+                        <field name="x_attachment_file" filename="x_attachment_filename"/>
+                    </group>
+                </page>
+            </notebook>
             </field>
 
         </record>

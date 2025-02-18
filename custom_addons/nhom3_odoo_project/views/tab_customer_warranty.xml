@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+    <record id="view_customer_warranty_form_inherit" model="ir.ui.view">
+        <field name="name">vehicle.information.inherit.customer.vehicle.warranty</field>
+        <field name="model">warranty.request</field>
+        <field name="inherit_id" ref="view_warranty_request_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="Customer/Vehicle" name="customer_vehicle">
+                    <group>
+                        <group string="Vehicle info">
+                            <field name="x_engine_number"/>
+                            <field name="x_main_route"/>
+                            <field name="x_body_type_id"/>
+                            <field name="x_body_marker"/>
+                            <field name="x_trans_number"/>
+                            <field name="x_customer_delivery_date"/>
+                        </group>
+                        <group string="Customer info">
+                            <field name="x_customer_email"/>
+                            <field name="x_customer_revenue"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    </data>
+</odoo>

@@ -74,6 +74,11 @@ class AccountMove_Nghia(models.Model):
         string='Purchase Order',
         required=True
     )
+    x_approval_attachment_file = fields.Binary(string="Approval Information")
+    x_approval_attachment_filename = fields.Char(string="Approval Information File Name")
+
+    x_attachment_file = fields.Binary(string="Attachment")
+    x_attachment_filename = fields.Char(string="Attachment File Name")
     def create(self, vals):
         # Chỉ tạo sequence cho vendor bill mới
         if vals.get('move_type') == 'in_invoice' and vals.get('name', '/') == '/':
