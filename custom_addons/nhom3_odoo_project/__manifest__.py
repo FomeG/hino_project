@@ -33,7 +33,7 @@
         'views/product_pricelist_item_views.xml', 
         #endregion
         'views/agent_payment_request_views.xml',
-
+        'views/tab_customer_warranty.xml',
         
         'views/tad_order_detail.xml',
         'views/tab_customer_signature.xml',

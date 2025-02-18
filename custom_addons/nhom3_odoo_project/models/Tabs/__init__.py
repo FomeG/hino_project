@@ -8,6 +8,7 @@ from . import tab_service_info_worklist_service
 from . import tab_promotions_program
 from . import tab_sale_order
 from . import tab_customer_vehicle_info
+from . import tab_customer_warranty
 
 # Model for Repair Quotation Tabs
 
